@@ -50,7 +50,7 @@ export default function TestimonialsPage() {
 
       <section className="pb-20 sm:pb-24">
         <Container>
-          <TestimonialSummary className="mx-auto max-w-4xl" />
+          <TestimonialSummary className="mx-auto max-w-md" />
           <div className="mt-16">
             <SectionHeading
               eyebrow="Featured projects"

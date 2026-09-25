@@ -206,4 +206,8 @@
     opacity: 1;
     transform: none;
   }
+  /* Without auto-scroll, let visitors swipe/scroll marquee rows themselves. */
+  .marquee {
+    overflow-x: auto;
+  }
 }

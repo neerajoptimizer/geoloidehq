@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Building2, Quote } from "lucide-react";
 import { revealDelay } from "@/lib/motion";
-import { attribution, featuredTestimonials, testimonials, type Testimonial } from "@/lib/testimonials";
+import { attribution, testimonials, type Testimonial } from "@/lib/testimonials";
+import { Marquee } from "./marquee";
 import { ButtonLink, Container, SectionHeading, cn } from "./ui";
 
 const avatarTones = [
@@ -59,20 +60,20 @@ export function TestimonialCard({ t, index, className }: { t: Testimonial; index
       data-reveal
       style={revealDelay(index % 3, 110)}
       className={cn(
-        "group relative flex flex-col rounded-3xl bg-white p-7 ring-1 ring-ink-100 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-ink-900/5 hover:ring-brand-200 sm:p-8",
+        "group relative flex flex-col rounded-2xl bg-white p-6 ring-1 ring-ink-100 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-ink-900/5 hover:ring-brand-200",
         className,
       )}
     >
       <div className="flex items-start justify-between gap-4">
         <CategoryChips t={t} />
-        <Quote className="size-8 shrink-0 text-brand-200 transition group-hover:text-brand-500" aria-hidden />
+        <Quote className="size-6 shrink-0 text-brand-200 transition group-hover:text-brand-500" aria-hidden />
       </div>
-      <p className="mt-6 font-display text-xl leading-snug font-bold text-ink-900">“{t.headline}”</p>
-      <blockquote className="mt-4 flex-1 text-ink-600">
+      <p className="mt-4 font-display text-lg leading-snug font-bold text-ink-900">“{t.headline}”</p>
+      <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ink-600">
         <p>{t.quote}</p>
       </blockquote>
-      <figcaption className="mt-8 flex items-center gap-4 border-t border-ink-100 pt-6">
-        <Avatar name={t.name} index={index} />
+      <figcaption className="mt-6 flex items-center gap-3 border-t border-ink-100 pt-5">
+        <Avatar name={t.name} index={index} className="size-10 text-sm" />
         <span className="min-w-0">
           <span className="flex items-center gap-1.5 font-semibold text-ink-900">
             {t.name}
@@ -90,7 +91,7 @@ export function FeaturedTestimonial({ t, index }: { t: Testimonial; index: numbe
     <figure
       data-reveal
       style={revealDelay(index, 140)}
-      className="relative isolate flex flex-col overflow-hidden rounded-[2rem] bg-ink-900 p-8 text-white sm:p-10"
+      className="relative isolate flex flex-col overflow-hidden rounded-3xl bg-ink-900 p-6 text-white sm:p-8"
     >
       <div className="bg-grid-light pointer-events-none absolute inset-0 -z-10" />
       <div className="pointer-events-none absolute -top-24 -right-24 -z-10 size-72 rounded-full border-[36px] border-brand-500/15" />
@@ -106,13 +107,13 @@ export function FeaturedTestimonial({ t, index }: { t: Testimonial; index: numbe
         </span>
         <CategoryChips t={t} dark />
       </div>
-      <Quote className="mt-8 size-10 text-brand-400" aria-hidden />
-      <p className="mt-4 font-display text-2xl leading-snug font-bold text-balance sm:text-3xl">“{t.headline}”</p>
-      <blockquote className="mt-5 flex-1 text-ink-300">
+      <Quote className="mt-6 size-7 text-brand-400" aria-hidden />
+      <p className="mt-3 font-display text-xl leading-snug font-bold text-balance sm:text-2xl">“{t.headline}”</p>
+      <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-ink-300">
         <p>{t.quote}</p>
       </blockquote>
       {t.delivered && (
-        <div className="mt-8">
+        <div className="mt-6">
           <p className="text-xs font-semibold tracking-wider text-ink-400 uppercase">What we delivered</p>
           <ul className="mt-3 flex flex-wrap gap-2">
             {t.delivered.map((d) => (
@@ -123,8 +124,8 @@ export function FeaturedTestimonial({ t, index }: { t: Testimonial; index: numbe
           </ul>
         </div>
       )}
-      <figcaption className="mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
-        <Avatar name={t.name} index={2} />
+      <figcaption className="mt-6 flex items-center gap-3 border-t border-white/10 pt-5">
+        <Avatar name={t.name} index={2} className="size-10 text-sm" />
         <span>
           <span className="flex items-center gap-1.5 font-semibold">
             {t.name}
@@ -139,60 +140,119 @@ export function FeaturedTestimonial({ t, index }: { t: Testimonial; index: numbe
 
 /** Trust strip summarising the reviews — every figure is derived from the real testimonial data. */
 export function TestimonialSummary({ className }: { className?: string }) {
-  const companies = testimonials.filter((t) => t.company).map((t) => t.company as string);
   const categories = new Set(testimonials.flatMap((t) => t.categories));
   return (
     <dl
       data-reveal
-      className={cn(
-        "grid grid-cols-1 gap-px overflow-hidden rounded-3xl bg-ink-100 ring-1 ring-ink-100 sm:grid-cols-3",
-        className,
-      )}
+      className={cn("grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-ink-100 ring-1 ring-ink-100", className)}
     >
       {[
-        { label: "Client stories", value: String(testimonials.length) },
-        { label: "Service areas reviewed", value: String(categories.size) },
-        { label: "Named businesses", value: companies.join(" · "), small: true },
+        { label: "Client stories", value: testimonials.length },
+        { label: "Service areas reviewed", value: categories.size },
       ].map((item) => (
-        <div key={item.label} className="flex flex-col-reverse justify-center bg-white px-6 py-5 text-center">
-          <dt className="mt-1 text-sm text-ink-500">{item.label}</dt>
-          <dd className={cn("font-display font-bold text-ink-900", item.small ? "text-base leading-snug" : "text-2xl")}>
-            {item.value}
-          </dd>
+        <div key={item.label} className="flex flex-col-reverse bg-white px-4 py-4 text-center">
+          <dt className="mt-0.5 text-xs text-ink-500 sm:text-sm">{item.label}</dt>
+          <dd className="font-display text-2xl font-bold text-ink-900">{item.value}</dd>
         </div>
       ))}
     </dl>
   );
 }
 
-/** Home page section: featured client projects plus a selection of reviews. */
-export function TestimonialsSection() {
-  const others = testimonials.filter((t) => !t.featured).slice(0, 3);
+/** Small review card used in scrolling rows and service pages. Full quote stays in the DOM (clamped visually). */
+export function CompactTestimonialCard({
+  t,
+  index,
+  className,
+  clamp = true,
+}: {
+  t: Testimonial;
+  index: number;
+  className?: string;
+  clamp?: boolean;
+}) {
+  const dark = t.featured;
   return (
-    <section className="bg-ink-50 py-20 sm:py-24">
+    <figure
+      className={cn(
+        "flex w-[300px] flex-col rounded-2xl p-5 ring-1 transition duration-300 hover:-translate-y-1 sm:w-[360px] sm:p-6",
+        dark
+          ? "bg-ink-900 text-white ring-ink-900 hover:shadow-xl hover:shadow-ink-900/20"
+          : "bg-white ring-ink-100 hover:shadow-xl hover:shadow-ink-900/5 hover:ring-brand-200",
+        className,
+      )}
+    >
+      <div className="flex items-center justify-between gap-3">
+        <span
+          className={cn(
+            "truncate rounded-full px-2.5 py-0.5 text-[11px] font-semibold",
+            dark ? "bg-white/10 text-brand-300" : "bg-brand-50 text-brand-700",
+          )}
+        >
+          {t.company ? `${t.company} · ${t.categories[0]}` : t.categories.join(" + ")}
+        </span>
+        <Quote className={cn("size-5 shrink-0", dark ? "text-brand-400" : "text-brand-300")} aria-hidden />
+      </div>
+      <p className={cn("mt-4 font-display text-base leading-snug font-bold", dark ? "text-white" : "text-ink-900")}>
+        “{t.headline}”
+      </p>
+      <blockquote className={cn("mt-2 flex-1 text-sm leading-relaxed", dark ? "text-ink-300" : "text-ink-600")}>
+        <p className={cn(clamp && "line-clamp-4")}>{t.quote}</p>
+      </blockquote>
+      <figcaption className={cn("mt-5 flex items-center gap-3 border-t pt-4", dark ? "border-white/10" : "border-ink-100")}>
+        <Avatar name={t.name} index={dark ? 2 : index} className="size-9 text-sm" />
+        <span className="min-w-0">
+          <span className={cn("flex items-center gap-1 text-sm font-semibold", dark ? "text-white" : "text-ink-900")}>
+            <span className="truncate">{t.name}</span>
+            <BadgeCheck className={cn("size-3.5 shrink-0", dark ? "text-brand-400" : "text-brand-500")} aria-label="Geoloide client" />
+          </span>
+          <span className={cn("block truncate text-xs", dark ? "text-ink-400" : "text-ink-500")}>{attribution(t)}</span>
+        </span>
+      </figcaption>
+    </figure>
+  );
+}
+
+/** Home page section: two auto-scrolling rows of compact reviews (pause on hover). */
+export function TestimonialsSection() {
+  // Interleave so each row mixes featured projects and reviews.
+  const rowA = testimonials.filter((_, i) => i % 2 === 0);
+  const rowB = testimonials.filter((_, i) => i % 2 === 1);
+  return (
+    <section className="overflow-hidden bg-ink-50 py-20 sm:py-24">
       <Container>
-        <SectionHeading
-          eyebrow="Client stories"
-          title="Trusted by growing businesses"
-          description="Don't just take our word for it — here's what founders and business owners say about working with Geoloide."
-        />
-        <TestimonialSummary className="mx-auto mt-10 max-w-4xl" />
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {featuredTestimonials.map((t, i) => (
-            <FeaturedTestimonial key={t.name} t={t} index={i} />
-          ))}
-        </div>
-        <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {others.map((t, i) => (
-            <TestimonialCard key={t.name} t={t} index={i} className={i === 2 ? "md:col-span-2 lg:col-span-1" : ""} />
-          ))}
-        </div>
-        <div className="mt-12 text-center">
-          <ButtonLink href="/testimonials" variant="dark" arrow>
-            Read all {testimonials.length} client stories
-          </ButtonLink>
+        <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeading
+            align="left"
+            eyebrow="Client stories"
+            title="Trusted by growing businesses"
+            description="Here's what founders and business owners say about working with Geoloide."
+          />
+          <TestimonialSummary className="w-full max-w-xs shrink-0" />
         </div>
       </Container>
+      <div className="mt-12 space-y-5">
+        <Marquee
+          items={rowA}
+          duration={70}
+          stretch
+          getKey={(t) => t.name}
+          renderItem={(t) => <CompactTestimonialCard t={t} index={testimonials.indexOf(t)} />}
+        />
+        <Marquee
+          items={rowB}
+          reverse
+          duration={65}
+          stretch
+          getKey={(t) => t.name}
+          renderItem={(t) => <CompactTestimonialCard t={t} index={testimonials.indexOf(t)} />}
+        />
+      </div>
+      <div className="mt-12 text-center">
+        <ButtonLink href="/testimonials" variant="dark" arrow>
+          Read all {testimonials.length} client stories
+        </ButtonLink>
+      </div>
     </section>
   );
 }
@@ -207,14 +267,12 @@ export function ServiceTestimonials({ items, serviceTitle }: { items: Testimonia
           eyebrow="Client stories"
           title={`What clients say about our ${serviceTitle.toLowerCase()}`}
         />
-        <div className={cn("mt-12 grid gap-6", items.length > 1 && "lg:grid-cols-2", items.length > 2 && "xl:grid-cols-3")}>
-          {items.map((t, i) =>
-            t.featured && items.length < 3 ? (
-              <FeaturedTestimonial key={t.name} t={t} index={i} />
-            ) : (
-              <TestimonialCard key={t.name} t={t} index={i} />
-            ),
-          )}
+        <div className="mt-12 flex flex-wrap justify-center gap-5">
+          {items.map((t, i) => (
+            <div key={t.name} data-reveal style={revealDelay(i, 110)} className="flex">
+              <CompactTestimonialCard t={t} index={i} clamp={false} className="w-full max-w-[380px]" />
+            </div>
+          ))}
         </div>
         <div className="mt-10 text-center">
           <Link
