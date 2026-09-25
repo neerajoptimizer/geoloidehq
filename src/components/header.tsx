@@ -11,7 +11,7 @@ import { ButtonLink, Container, ServiceIcon, cn } from "./ui";
 
 // Brand-green underline that slides in on hover and stays on the active page.
 const navUnderline =
-  "relative after:absolute after:inset-x-4 after:bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-500 after:transition-transform after:duration-300 hover:after:scale-x-100";
+  "relative after:absolute after:inset-x-3 xl:after:inset-x-4 after:bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-500 after:transition-transform after:duration-300 hover:after:scale-x-100";
 
 export function Header() {
   const pathname = usePathname();
@@ -88,7 +88,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition",
+                        "inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap transition xl:px-4",
                         navUnderline,
                         isActive(item.href) ? "text-brand-700 after:scale-x-100" : "text-ink-700 hover:text-ink-900",
                       )}
@@ -131,7 +131,7 @@ export function Header() {
                       href={item.href}
                       aria-current={isActive(item.href) ? "page" : undefined}
                       className={cn(
-                        "rounded-full px-4 py-2 text-sm font-medium transition",
+                        "rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap transition xl:px-4",
                         navUnderline,
                         isActive(item.href) ? "text-brand-700 after:scale-x-100" : "text-ink-700 hover:text-ink-900",
                       )}
@@ -145,7 +145,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="hidden sm:block">
+            <div className="hidden sm:block lg:hidden xl:block">
               <ButtonLink href="/contact" arrow>
                 Get a Free Consultation
               </ButtonLink>

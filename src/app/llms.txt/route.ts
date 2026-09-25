@@ -1,9 +1,11 @@
+import { getAllPosts } from "@/lib/blog";
 import { services, site } from "@/lib/site";
 
 export const dynamic = "force-static";
 
 // llms.txt — a concise, machine-readable summary of the site for AI search engines and assistants.
-export function GET() {
+export async function GET() {
+  const posts = await getAllPosts();
   const body = `# ${site.legalName}
 
 > ${site.description}
@@ -19,6 +21,9 @@ ${services.map((s) => `- [${s.title}](${site.url}/services/${s.slug}): ${s.short
 - [Testimonials](${site.url}/testimonials): Client reviews, incl. Easy Pip (fintech website) and Laundry Lounge (laundry management software)
 - [Careers](${site.url}/careers): Open roles in Noida and New Delhi
 - [Contact](${site.url}/contact): Free consultation and enquiries
+
+## Blog
+${posts.map((p) => `- [${p.meta.title}](${site.url}/blog/${p.slug}): ${p.meta.description}`).join("\n")}
 
 ## Contact
 - Email: ${site.email}

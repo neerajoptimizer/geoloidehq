@@ -11,6 +11,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import { LatestPosts } from "@/components/blog";
 import { Marquee } from "@/components/marquee";
 import { CountUp } from "@/components/motion";
 import { revealDelay } from "@/lib/motion";
@@ -18,6 +19,7 @@ import { CtaBanner, Faq, ProcessSection, ServiceCard } from "@/components/sectio
 import { JsonLd } from "@/components/seo";
 import { TestimonialsSection } from "@/components/testimonials";
 import { ButtonLink, Container, Eyebrow, SectionHeading } from "@/components/ui";
+import { getAllPosts } from "@/lib/blog";
 import { images } from "@/lib/images";
 import { faqSchema, pageMetadata, webPageSchema } from "@/lib/seo";
 import { homeFaqs, industries, services, site, stats, tools } from "@/lib/site";
@@ -147,7 +149,8 @@ function HeroVisual() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const posts = (await getAllPosts()).slice(0, 3);
   return (
     <>
       {/* Hero */}
@@ -394,6 +397,8 @@ export default function Home() {
       </section>
 
       <TestimonialsSection />
+
+      <LatestPosts posts={posts} />
 
       {/* FAQ */}
       <section className="pt-24">

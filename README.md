@@ -93,6 +93,21 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXX                 # Google Analytics 4 measurement ID
 - Other effects: `CountUp`, `ScrollProgress`, `ScrollLine` (`src/components/motion.tsx`) and `Marquee`
   (`src/components/marquee.tsx`); keyframes are defined in `src/app/globals.css`.
 
+## Blog
+
+Articles live in [`src/content/blog`](src/content/blog) as `.mdx` files — the file name becomes the URL
+(`/blog/<file-name>`). To publish a new article:
+
+1. Add cover/inline images to `src/assets/blog/` (landscape, ~1600px wide JPG).
+2. Copy an existing article, then edit the `meta` block (title, `seoTitle` ≤ 50 chars, `description` ≤ 160 chars,
+   `category`, `date`, `cover`, `coverAlt`, `relatedService`, optional `faqs`) and the body.
+3. Use `## Heading` for sections (they build the table of contents) and the components
+   `<Figure src={img} alt="…" caption="…" />`, `<Callout title="…">…</Callout>` and
+   `<ArticleCta href="/contact" title="…">…</ArticleCta>` inside the article.
+
+The blog listing, home "Latest insights", related reading on service pages, sitemap, RSS feed (`/blog/rss.xml`),
+share image and structured data (BlogPosting, FAQPage, BreadcrumbList) all update automatically.
+
 ## Brand
 
 - Green `#1DB954` (`brand-500`), Ink `#231E23` (`ink-900`)

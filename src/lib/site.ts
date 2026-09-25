@@ -35,6 +35,7 @@ export const mainNav = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/process", label: "Our Process" },
+  { href: "/blog", label: "Blog" },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
 ] as const;
