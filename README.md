@@ -93,6 +93,13 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXX                 # Google Analytics 4 measurement ID
 - Other effects: `CountUp`, `ScrollProgress`, `ScrollLine` (`src/components/motion.tsx`) and `Marquee`
   (`src/components/marquee.tsx`); keyframes are defined in `src/app/globals.css`.
 
+## Technology logos
+
+The "Platforms & technologies" grid and the tool chips on service pages come from
+[`src/lib/tech.ts`](src/lib/tech.ts). Logos are from [Simple Icons](https://simpleicons.org) (CC0); tools without a
+Simple Icons logo show a lettered badge in their brand colour. Add or remove a tool there and pick one of the
+categories (`marketing`, `development`, `commerce`, `automation`, `ai`).
+
 ## Blog
 
 Articles live in [`src/content/blog`](src/content/blog) as `.mdx` files — the file name becomes the URL

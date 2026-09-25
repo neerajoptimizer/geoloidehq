@@ -348,9 +348,6 @@ export const homeFaqs = [
   },
 ];
 
-/** Every platform across our service stacks, de-duplicated — used for the tools marquee. */
-export const tools = [...new Set(services.flatMap((s) => s.stack))];
-
 /** WhatsApp click-to-chat link with a pre-filled message. */
 export function whatsappUrl(message: string = site.whatsapp.message) {
   return `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(message)}`;

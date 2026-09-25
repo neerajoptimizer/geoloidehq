@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { CtaBanner, PageHero, ProcessSection } from "@/components/sections";
 import { JsonLd } from "@/components/seo";
+import { TechChip } from "@/components/tech";
 import { images, serviceImages } from "@/lib/images";
 import { ButtonLink, Container, ServiceIcon } from "@/components/ui";
 import { absoluteUrl, pageMetadata, webPageSchema } from "@/lib/seo";
@@ -98,9 +99,7 @@ export default function ServicesPage() {
                 </ul>
                 <div className="mt-8 flex flex-wrap gap-2">
                   {s.stack.map((t) => (
-                    <span key={t} className="rounded-full bg-ink-50 px-3 py-1 text-xs font-medium text-ink-600">
-                      {t}
-                    </span>
+                    <TechChip key={t} name={t} />
                   ))}
                 </div>
                 <Link

@@ -7,6 +7,7 @@ import { CtaBanner, Faq, PageHero } from "@/components/sections";
 import { revealDelay } from "@/lib/motion";
 import { LatestPosts } from "@/components/blog";
 import { JsonLd } from "@/components/seo";
+import { TechChip } from "@/components/tech";
 import { ServiceTestimonials } from "@/components/testimonials";
 import { ButtonLink, Container, SectionHeading, ServiceIcon } from "@/components/ui";
 import { getAllPosts } from "@/lib/blog";
@@ -149,13 +150,8 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             <h3 className="mt-12 text-sm font-semibold tracking-wider text-ink-400 uppercase">Tools &amp; platforms we use</h3>
             <ul className="mt-4 flex flex-wrap gap-2">
               {service.stack.map((t, i) => (
-                <li
-                  key={t}
-                  data-reveal
-                  style={revealDelay(i, 50)}
-                  className="rounded-full bg-white/5 px-4 py-2 text-sm font-medium text-ink-200 ring-1 ring-white/10 transition hover:bg-brand-500 hover:text-white hover:ring-brand-500"
-                >
-                  {t}
+                <li key={t} data-reveal style={revealDelay(i, 50)}>
+                  <TechChip name={t} dark />
                 </li>
               ))}
             </ul>

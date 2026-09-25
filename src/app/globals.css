@@ -186,6 +186,23 @@
   transform: none;
 }
 
+/* Technology tabs: CSS-only filtering driven by the checked radio (see components/tech.tsx). */
+.tech-stack:has([data-tech-tab="marketing"]:checked) [data-tech-cat]:not([data-tech-cat="marketing"]) {
+  display: none;
+}
+.tech-stack:has([data-tech-tab="development"]:checked) [data-tech-cat]:not([data-tech-cat="development"]) {
+  display: none;
+}
+.tech-stack:has([data-tech-tab="commerce"]:checked) [data-tech-cat]:not([data-tech-cat="commerce"]) {
+  display: none;
+}
+.tech-stack:has([data-tech-tab="automation"]:checked) [data-tech-cat]:not([data-tech-cat="automation"]) {
+  display: none;
+}
+.tech-stack:has([data-tech-tab="ai"]:checked) [data-tech-cat]:not([data-tech-cat="ai"]) {
+  display: none;
+}
+
 /* Marquee pauses on hover so visitors can read it. */
 .marquee:hover .marquee-track {
   animation-play-state: paused;

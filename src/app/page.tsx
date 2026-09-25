@@ -22,17 +22,17 @@ import {
   Zap,
 } from "lucide-react";
 import { LatestPosts } from "@/components/blog";
-import { Marquee } from "@/components/marquee";
 import { CountUp } from "@/components/motion";
 import { revealDelay } from "@/lib/motion";
 import { CtaBanner, Faq, ProcessSection, ServiceCard } from "@/components/sections";
 import { JsonLd } from "@/components/seo";
+import { TechStackSection } from "@/components/tech";
 import { TestimonialsSection } from "@/components/testimonials";
 import { ButtonLink, Container, Eyebrow, SectionHeading } from "@/components/ui";
 import { getAllPosts } from "@/lib/blog";
 import { images } from "@/lib/images";
 import { faqSchema, pageMetadata, webPageSchema } from "@/lib/seo";
-import { homeFaqs, industries, services, site, stats, tools } from "@/lib/site";
+import { homeFaqs, industries, services, site, stats } from "@/lib/site";
 
 const seo = {
   title: "Geoloide | Digital Marketing, Web & App Development Agency",
@@ -242,24 +242,7 @@ export default async function Home() {
         </Container>
       </section>
 
-      {/* Tools marquee */}
-      <section aria-labelledby="tools-heading" className="bg-ink-50/60 py-10">
-        <Container>
-          <h2 id="tools-heading" className="text-center font-sans text-sm font-semibold tracking-wider text-ink-500 uppercase">
-            Platforms &amp; technologies we work with
-          </h2>
-        </Container>
-        <Marquee
-          className="mt-6"
-          items={tools}
-          renderItem={(tool) => (
-            <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink-700 ring-1 ring-ink-100">
-              <span className="size-1.5 rounded-full bg-brand-500" />
-              {tool}
-            </span>
-          )}
-        />
-      </section>
+      <TechStackSection />
 
       {/* Services */}
       <section className="py-20 sm:py-24">
