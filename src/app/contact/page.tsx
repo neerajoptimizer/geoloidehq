@@ -3,13 +3,14 @@ import { PageHero } from "@/components/sections";
 import { JsonLd } from "@/components/seo";
 import { Container } from "@/components/ui";
 import { pageMetadata, webPageSchema } from "@/lib/seo";
-import { site } from "@/lib/site";
+import { WhatsAppButton, WhatsAppIcon } from "@/components/whatsapp";
+import { site, whatsappUrl } from "@/lib/site";
 import { ContactForm } from "./contact-form";
 
 const seo = {
   title: "Contact Us – Book a Free Consultation",
   description:
-    "Contact Geoloide for digital marketing, web & app development or business automation. Offices at KG Marg, New Delhi and Noida. Email contact@geoloide.com.",
+    "Contact Geoloide for digital marketing, websites, apps or automation. Offices in New Delhi & Noida. WhatsApp +91 93012 78780 or email contact@geoloide.com.",
   path: "/contact",
 };
 
@@ -30,7 +31,9 @@ export default function ContactPage() {
         }
         description="Tell us about your goals and we'll get back within one business day with next steps and a free consultation slot."
         breadcrumbs={[{ name: "Contact Us", path: seo.path }]}
-      />
+      >
+        <WhatsAppButton label={`WhatsApp ${site.whatsapp.display}`} />
+      </PageHero>
 
       <section className="pb-24">
         <Container className="grid gap-10 lg:grid-cols-12">
@@ -63,6 +66,22 @@ export default function ContactPage() {
                     <p className="text-sm text-ink-400">Website</p>
                     <a href={site.url} className="font-semibold text-white hover:text-brand-400">
                       www.geoloide.com
+                    </a>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#25D366] text-white">
+                    <WhatsAppIcon className="size-5" />
+                  </span>
+                  <div>
+                    <p className="text-sm text-ink-400">WhatsApp</p>
+                    <a
+                      href={whatsappUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-white hover:text-brand-400"
+                    >
+                      {site.whatsapp.display}
                     </a>
                   </div>
                 </li>

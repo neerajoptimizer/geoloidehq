@@ -5,13 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Mail, MapPin, Menu, X } from "lucide-react";
-import { mainNav, services, site } from "@/lib/site";
+import { mainNav, services, site, whatsappUrl } from "@/lib/site";
 import { ScrollProgress } from "./motion";
 import { ButtonLink, Container, ServiceIcon, cn } from "./ui";
+import { WhatsAppButton, WhatsAppIcon } from "./whatsapp";
 
 // Brand-green underline that slides in on hover and stays on the active page.
 const navUnderline =
-  "relative after:absolute after:inset-x-4 after:bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-500 after:transition-transform after:duration-300 hover:after:scale-x-100";
+  "relative after:absolute after:inset-x-3 xl:after:inset-x-4 after:bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-500 after:transition-transform after:duration-300 hover:after:scale-x-100";
 
 export function Header() {
   const pathname = usePathname();
@@ -45,15 +46,24 @@ export function Header() {
     <header className="sticky top-0 z-50">
       <div className="hidden bg-ink-900 text-xs text-ink-300 md:block">
         <Container className="flex h-9 items-center justify-between">
-          <p>
+          <p className="hidden lg:block">
             {site.descriptor} · <span className="text-brand-400">{site.tagline}</span>
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex w-full items-center justify-center gap-6 whitespace-nowrap lg:w-auto lg:justify-end">
+            <a
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-white"
+            >
+              <WhatsAppIcon className="size-3.5 text-[#25D366]" />
+              {site.whatsapp.display}
+            </a>
             <a href={`mailto:${site.email}`} className="inline-flex items-center gap-1.5 hover:text-white">
               <Mail className="size-3.5" aria-hidden />
               {site.email}
             </a>
-            <span className="inline-flex items-center gap-1.5">
+            <span className="hidden items-center gap-1.5 lg:inline-flex">
               <MapPin className="size-3.5" aria-hidden />
               New Delhi · Noida
             </span>
@@ -88,7 +98,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition",
+                        "inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap transition xl:px-4",
                         navUnderline,
                         isActive(item.href) ? "text-brand-700 after:scale-x-100" : "text-ink-700 hover:text-ink-900",
                       )}
@@ -131,7 +141,7 @@ export function Header() {
                       href={item.href}
                       aria-current={isActive(item.href) ? "page" : undefined}
                       className={cn(
-                        "rounded-full px-4 py-2 text-sm font-medium transition",
+                        "rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap transition xl:px-4",
                         navUnderline,
                         isActive(item.href) ? "text-brand-700 after:scale-x-100" : "text-ink-700 hover:text-ink-900",
                       )}
@@ -145,7 +155,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="hidden sm:block">
+            <div className="hidden sm:block lg:hidden xl:block">
               <ButtonLink href="/contact" arrow>
                 Get a Free Consultation
               </ButtonLink>
@@ -207,6 +217,7 @@ export function Header() {
               <ButtonLink href="/contact" className="w-full" arrow>
                 Get a Free Consultation
               </ButtonLink>
+              <WhatsAppButton className="w-full" />
               <a
                 href={`mailto:${site.email}`}
                 className="flex items-center justify-center gap-2 py-2 text-sm font-medium text-ink-600"

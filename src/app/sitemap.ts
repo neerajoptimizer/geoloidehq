@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getAllPosts } from "@/lib/blog";
 import { images, serviceImages } from "@/lib/images";
 import { absoluteUrl } from "@/lib/seo";
 import { services, site } from "@/lib/site";
@@ -6,7 +7,8 @@ import { services, site } from "@/lib/site";
 // Bump when page content meaningfully changes so crawlers re-fetch.
 const lastModified = new Date("2026-09-25");
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await getAllPosts();
   const img = (...list: { src: { src: string } }[]) => list.map((i) => absoluteUrl(i.src.src));
   const pages: {
     path: string;
@@ -34,16 +36,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     { path: "/about", priority: 0.8, changeFrequency: "monthly", images: img(images.teamMeeting, images.indiaGate) },
     { path: "/contact", priority: 0.8, changeFrequency: "yearly" },
+    { path: "/testimonials", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/blog", priority: 0.8, changeFrequency: "weekly", images: posts.map((p) => absoluteUrl(p.meta.cover.src)) },
     { path: "/process", priority: 0.7, changeFrequency: "monthly", images: img(images.teamPresentation) },
     { path: "/careers", priority: 0.6, changeFrequency: "weekly", images: img(images.teamTogether) },
     { path: "/privacy-policy", priority: 0.3, changeFrequency: "yearly" },
     { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
   ];
-  return pages.map((p) => ({
-    url: `${site.url}${p.path}`,
-    lastModified,
-    changeFrequency: p.changeFrequency,
-    priority: p.priority,
-    ...(p.images && { images: p.images }),
-  }));
+  return [
+    ...pages.map((p) => ({
+      url: `${site.url}${p.path}`,
+      lastModified,
+      changeFrequency: p.changeFrequency,
+      priority: p.priority,
+      ...(p.images && { images: p.images }),
+    })),
+    ...posts.map((p) => ({
+      url: `${site.url}/blog/${p.slug}`,
+      lastModified: new Date(p.meta.updated ?? p.meta.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+      images: [absoluteUrl(p.meta.cover.src)],
+    })),
+  ];
 }

@@ -5,11 +5,16 @@ import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { CtaBanner, Faq, PageHero } from "@/components/sections";
 import { revealDelay } from "@/lib/motion";
+import { LatestPosts } from "@/components/blog";
 import { JsonLd } from "@/components/seo";
+import { TechChip } from "@/components/tech";
+import { ServiceTestimonials } from "@/components/testimonials";
 import { ButtonLink, Container, SectionHeading, ServiceIcon } from "@/components/ui";
+import { getAllPosts } from "@/lib/blog";
 import { serviceImages } from "@/lib/images";
 import { absoluteUrl, faqSchema, ORG_ID, pageMetadata, webPageSchema } from "@/lib/seo";
 import { getService, services, site } from "@/lib/site";
+import { testimonialsForService } from "@/lib/testimonials";
 
 export const dynamicParams = false;
 
@@ -36,6 +41,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
   const others = services.filter((s) => s.slug !== service.slug);
   const path = `/services/${service.slug}`;
   const img = serviceImages[service.slug];
+  const articles = (await getAllPosts()).filter((p) => p.meta.relatedService === service.slug);
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -144,19 +150,22 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             <h3 className="mt-12 text-sm font-semibold tracking-wider text-ink-400 uppercase">Tools &amp; platforms we use</h3>
             <ul className="mt-4 flex flex-wrap gap-2">
               {service.stack.map((t, i) => (
-                <li
-                  key={t}
-                  data-reveal
-                  style={revealDelay(i, 50)}
-                  className="rounded-full bg-white/5 px-4 py-2 text-sm font-medium text-ink-200 ring-1 ring-white/10 transition hover:bg-brand-500 hover:text-white hover:ring-brand-500"
-                >
-                  {t}
+                <li key={t} data-reveal style={revealDelay(i, 50)}>
+                  <TechChip name={t} dark />
                 </li>
               ))}
             </ul>
           </div>
         </Container>
       </section>
+
+      <ServiceTestimonials items={testimonialsForService(service.slug)} serviceTitle={service.title} />
+
+      <LatestPosts
+        posts={articles}
+        title="Related reading"
+        description={`Guides and insights on ${service.title.toLowerCase()} from our team.`}
+      />
 
       <section className="bg-ink-50 py-24">
         <Container className="grid gap-12 lg:grid-cols-3">

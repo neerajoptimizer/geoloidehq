@@ -7,6 +7,12 @@ export const site = {
     "Geoloide Private Limited is a management partner for growing businesses — delivering digital marketing, website & app development, and business simplification & automation that take brands global.",
   url: "https://www.geoloide.com",
   email: "contact@geoloide.com",
+  whatsapp: {
+    /** International format without "+" or spaces, as required by wa.me links. */
+    number: "919301278780",
+    display: "+91 93012 78780",
+    message: "Hi Geoloide! I'd like to discuss a project.",
+  },
   foundingLocation: "New Delhi, India",
   hours: "Mon – Sat, 10:00 AM – 7:00 PM IST",
   // Official social profiles — shown in the footer and output as schema.org sameAs.
@@ -35,6 +41,7 @@ export const mainNav = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/process", label: "Our Process" },
+  { href: "/blog", label: "Blog" },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
 ] as const;
@@ -307,37 +314,16 @@ export const processSteps = [
   },
 ];
 
-export const testimonials = [
-  {
-    quote:
-      "Geoloide rebuilt our website and ran our ads in three new markets. Enquiries doubled within a quarter and our cost per lead dropped significantly.",
-    name: "Rohit Malhotra",
-    role: "Founder, export manufacturing business",
-  },
-  {
-    quote:
-      "Their automation work removed hours of manual reporting every week. Our team finally has one source of truth for sales and operations.",
-    name: "Priya Nair",
-    role: "COO, logistics company",
-  },
-  {
-    quote:
-      "A true management partner — strategic, responsive and genuinely invested in our growth. The mobile app they delivered is rated 4.8 by our users.",
-    name: "Aman Verma",
-    role: "Director, retail brand",
-  },
-];
-
 export const industries = [
-  "Manufacturing & Export",
-  "Retail & E-commerce",
-  "Healthcare",
-  "Education",
-  "Real Estate",
-  "Logistics",
-  "Professional Services",
-  "Hospitality",
-];
+  { name: "Manufacturing & Export", icon: "factory", body: "B2B websites and global lead generation for exporters." },
+  { name: "Retail & E-commerce", icon: "shopping", body: "Online stores, performance ads and marketplace growth." },
+  { name: "Healthcare", icon: "health", body: "Patient-friendly websites and appointment booking." },
+  { name: "Education", icon: "education", body: "Admissions campaigns, portals and student engagement." },
+  { name: "Real Estate", icon: "realestate", body: "Lead-focused property listings and ad campaigns." },
+  { name: "Logistics", icon: "logistics", body: "Tracking, automation and operations dashboards." },
+  { name: "Professional Services", icon: "professional", body: "Authority websites and steady client acquisition." },
+  { name: "Hospitality", icon: "hospitality", body: "Direct bookings and social-first marketing." },
+] as const;
 
 export const homeFaqs = [
   {
@@ -362,5 +348,7 @@ export const homeFaqs = [
   },
 ];
 
-/** Every platform across our service stacks, de-duplicated — used for the tools marquee. */
-export const tools = [...new Set(services.flatMap((s) => s.stack))];
+/** WhatsApp click-to-chat link with a pre-filled message. */
+export function whatsappUrl(message: string = site.whatsapp.message) {
+  return `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(message)}`;
+}

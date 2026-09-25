@@ -186,6 +186,36 @@
   transform: none;
 }
 
+/* Technology tabs: CSS-only filtering driven by the checked radio (see components/tech.tsx). */
+.tech-stack:has([data-tech-tab="marketing"]:checked) [data-tech-cat]:not([data-tech-cat="marketing"]) {
+  display: none;
+}
+.tech-stack:has([data-tech-tab="development"]:checked) [data-tech-cat]:not([data-tech-cat="development"]) {
+  display: none;
+}
+.tech-stack:has([data-tech-tab="commerce"]:checked) [data-tech-cat]:not([data-tech-cat="commerce"]) {
+  display: none;
+}
+.tech-stack:has([data-tech-tab="automation"]:checked) [data-tech-cat]:not([data-tech-cat="automation"]) {
+  display: none;
+}
+.tech-stack:has([data-tech-tab="ai"]:checked) [data-tech-cat]:not([data-tech-cat="ai"]) {
+  display: none;
+}
+
+/* Collapsed "All" view: one row until "View all" is ticked; the toggle only shows on the All tab. */
+.tech-stack:has([data-tech-tab="all"]:checked):not(:has([data-tech-more]:checked)) [data-tech-extra] {
+  display: none;
+}
+@media (min-width: 40rem) and (max-width: 63.999rem) {
+  .tech-stack:has([data-tech-tab="all"]:checked):not(:has([data-tech-more]:checked)) [data-tech-extra="wide"] {
+    display: flex;
+  }
+}
+.tech-stack:not(:has([data-tech-tab="all"]:checked)) .tech-more-toggle {
+  display: none;
+}
+
 /* Marquee pauses on hover so visitors can read it. */
 .marquee:hover .marquee-track {
   animation-play-state: paused;
@@ -205,5 +235,13 @@
   .js [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+  /* Without auto-scroll, let visitors swipe/scroll marquee rows themselves. */
+  .marquee {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .marquee::-webkit-scrollbar {
+    display: none;
   }
 }

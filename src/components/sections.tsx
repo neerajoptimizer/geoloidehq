@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Quote } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import type { ReactNode } from "react";
 import { images, serviceImages, type SiteImage } from "@/lib/images";
-import { processSteps, testimonials, type Service } from "@/lib/site";
+import { processSteps, type Service } from "@/lib/site";
 import { revealDelay } from "@/lib/motion";
 import { Breadcrumbs } from "./seo";
+import { WhatsAppButton } from "./whatsapp";
 import { ButtonLink, Container, Eyebrow, SectionHeading, ServiceIcon, cn } from "./ui";
 
 export function PageHero({
@@ -147,45 +148,6 @@ export function ProcessSection({ dark = true }: { dark?: boolean }) {
   );
 }
 
-export function Testimonials() {
-  return (
-    <section className="bg-ink-50 py-24">
-      <Container>
-        <SectionHeading
-          eyebrow="Client stories"
-          title="Trusted by ambitious businesses"
-          description="Partnerships built on outcomes, not outputs."
-        />
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <figure
-              key={t.name}
-              data-reveal
-              style={revealDelay(i, 120)}
-              className="flex flex-col rounded-3xl bg-white p-8 ring-1 ring-ink-100 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-ink-900/5"
-            >
-              <Quote className="size-8 text-brand-500" aria-hidden />
-              <blockquote className="mt-6 flex-1 text-lg text-ink-700">“{t.quote}”</blockquote>
-              <figcaption className="mt-8 flex items-center gap-4 border-t border-ink-100 pt-6">
-                <span className="grid size-11 place-items-center rounded-full bg-brand-100 font-display font-bold text-brand-700">
-                  {t.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-                </span>
-                <span>
-                  <span className="block font-semibold text-ink-900">{t.name}</span>
-                  <span className="block text-sm text-ink-500">{t.role}</span>
-                </span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
-
 export function Faq({ items }: { items: { q: string; a: string }[] }) {
   return (
     <div data-reveal className="divide-y divide-ink-100 rounded-3xl bg-white ring-1 ring-ink-100">
@@ -234,9 +196,7 @@ export function CtaBanner({
             <ButtonLink href="/contact" variant="dark" arrow>
               Book a Free Consultation
             </ButtonLink>
-            <ButtonLink href="/services" variant="ghostLight">
-              Explore Services
-            </ButtonLink>
+            <WhatsAppButton variant="light" />
           </div>
         </div>
       </Container>

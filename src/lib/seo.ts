@@ -13,6 +13,8 @@ type PageSeo = {
   absoluteTitle?: boolean;
   /** Social share image; defaults to the site-wide generated Open Graph image. */
   image?: string;
+  /** Marks the page as an article (blog post) for Open Graph. */
+  article?: { publishedTime: string; modifiedTime?: string; section: string; tags?: string[]; authors?: string[] };
 };
 
 export function pageMetadata({
@@ -22,6 +24,7 @@ export function pageMetadata({
   keywords,
   absoluteTitle,
   image = "/opengraph-image",
+  article,
 }: PageSeo): Metadata {
   const fullTitle = absoluteTitle ? title : `${title} | ${site.name}`;
   return {
@@ -30,7 +33,7 @@ export function pageMetadata({
     keywords,
     alternates: { canonical: path },
     openGraph: {
-      type: "website",
+      ...(article ? { type: "article" as const, ...article } : { type: "website" as const }),
       locale: "en_IN",
       siteName: site.legalName,
       url: path,

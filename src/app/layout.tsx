@@ -5,6 +5,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { RevealObserver } from "@/components/motion";
 import { JsonLd } from "@/components/seo";
+import { WhatsAppFloat } from "@/components/whatsapp";
 import { absoluteUrl, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { services, site } from "@/lib/site";
 import "./globals.css";
@@ -99,6 +100,7 @@ const structuredData = {
       description: site.description,
       slogan: site.tagline,
       email: site.email,
+      telephone: site.whatsapp.display,
       foundingLocation: site.foundingLocation,
       address: offices[0].address,
       areaServed: site.areaServed.map((name) => ({ "@type": "Country", name })),
@@ -107,6 +109,7 @@ const structuredData = {
         "@type": "ContactPoint",
         contactType: "sales",
         email: site.email,
+        telephone: site.whatsapp.display,
         availableLanguage: ["English", "Hindi"],
         areaServed: "Worldwide",
       },
@@ -120,6 +123,7 @@ const structuredData = {
       url: site.url,
       image: absoluteUrl("/logo.png"),
       email: site.email,
+      telephone: site.whatsapp.display,
       address: o.address,
       hasMap: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(o.mapQuery)}`,
       openingHoursSpecification: {
@@ -166,6 +170,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
+        <WhatsAppFloat />
         <JsonLd data={structuredData} />
         <RevealObserver />
         <Analytics />
