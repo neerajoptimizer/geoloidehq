@@ -9,8 +9,12 @@ export const site = {
   email: "contact@geoloide.com",
   foundingLocation: "New Delhi, India",
   hours: "Mon – Sat, 10:00 AM – 7:00 PM IST",
-  // Official social profile URLs (LinkedIn, Instagram, X, Facebook…) — used for schema.org sameAs.
-  social: [] as string[],
+  // Official social profiles — shown in the footer and output as schema.org sameAs.
+  social: [
+    { name: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/company/geoloide" },
+    { name: "Instagram", icon: "instagram", href: "https://www.instagram.com/geoloidehq/" },
+    { name: "Facebook", icon: "facebook", href: "https://www.facebook.com/p/Geoloide-Pvt-Ltd-61552338420812/" },
+  ],
   areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "Canada", "Singapore"],
   offices: [
     {

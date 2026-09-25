@@ -77,7 +77,7 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXX                 # Google Analytics 4 measurement ID
 1. Deploy to `https://www.geoloide.com` and point `geoloide.com` to the same deployment (it redirects to www).
 2. Verify the site in **Google Search Console** and **Bing Webmaster Tools**, then submit `https://www.geoloide.com/sitemap.xml`.
 3. Create/claim a **Google Business Profile** for both offices using the exact same name, address and email as the site.
-4. Add official social profile URLs to `site.social` in `src/lib/site.ts` (outputs schema.org `sameAs`).
+4. Keep social profile links in `site.social` in `src/lib/site.ts` up to date (footer icons + schema.org `sameAs`).
 5. Replace placeholder stats, testimonials and roles with real data; add case studies and blog content over time.
 6. Validate structured data with the [Rich Results Test](https://search.google.com/test/rich-results).
 

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Globe, Mail, MapPin } from "lucide-react";
 import { services, site } from "@/lib/site";
+import { SocialLinks } from "./social-icons";
 import { Container } from "./ui";
 
 const companyLinks = [
@@ -36,6 +37,10 @@ export function Footer() {
                 <Globe className="size-4 text-brand-400" aria-hidden />
                 www.geoloide.com
               </a>
+            </div>
+            <div className="mt-6">
+              <p className="text-sm font-semibold text-white">Follow us</p>
+              <SocialLinks className="mt-3 flex items-center gap-3" />
             </div>
           </div>
 
