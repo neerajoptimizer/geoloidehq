@@ -213,11 +213,8 @@ export function CompactTestimonialCard({
   );
 }
 
-/** Home page section: two auto-scrolling rows of compact reviews (pause on hover). */
+/** Home page section: one auto-scrolling row of compact reviews (pauses on hover). */
 export function TestimonialsSection() {
-  // Interleave so each row mixes featured projects and reviews.
-  const rowA = testimonials.filter((_, i) => i % 2 === 0);
-  const rowB = testimonials.filter((_, i) => i % 2 === 1);
   return (
     <section className="overflow-hidden bg-ink-50 py-20 sm:py-24">
       <Container>
@@ -231,23 +228,14 @@ export function TestimonialsSection() {
           <TestimonialSummary className="w-full max-w-xs shrink-0" />
         </div>
       </Container>
-      <div className="mt-12 space-y-5">
-        <Marquee
-          items={rowA}
-          duration={70}
-          stretch
-          getKey={(t) => t.name}
-          renderItem={(t) => <CompactTestimonialCard t={t} index={testimonials.indexOf(t)} />}
-        />
-        <Marquee
-          items={rowB}
-          reverse
-          duration={65}
-          stretch
-          getKey={(t) => t.name}
-          renderItem={(t) => <CompactTestimonialCard t={t} index={testimonials.indexOf(t)} />}
-        />
-      </div>
+      <Marquee
+        className="mt-12"
+        items={testimonials}
+        duration={110}
+        stretch
+        getKey={(t) => t.name}
+        renderItem={(t) => <CompactTestimonialCard t={t} index={testimonials.indexOf(t)} />}
+      />
       <div className="mt-12 text-center">
         <ButtonLink href="/testimonials" variant="dark" arrow>
           Read all {testimonials.length} client stories
