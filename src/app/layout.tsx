@@ -180,6 +180,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <WhatsAppFloat />
         <JsonLd data={structuredData} />
         <RevealObserver />
+        <div id="google_translate_element" hidden />
         <Analytics />
       </body>
     </html>

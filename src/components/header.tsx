@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Mail, MapPin, Menu, X } from "lucide-react";
 import { mainNav, services, site, whatsappUrl } from "@/lib/site";
+import { LanguageSwitcher } from "./language-switcher";
 import { ScrollProgress } from "./motion";
 import { ButtonLink, Container, ServiceIcon, cn } from "./ui";
 import { WhatsAppButton, WhatsAppIcon } from "./whatsapp";
@@ -67,6 +68,8 @@ export function Header() {
               <MapPin className="size-3.5" aria-hidden />
               New Delhi · Noida
             </span>
+            <span className="h-4 w-px bg-white/15" aria-hidden />
+            <LanguageSwitcher variant="dark" className="-mr-2.5" />
           </div>
         </Container>
       </div>
@@ -154,7 +157,8 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <LanguageSwitcher className="md:hidden" />
             <div className="hidden sm:block lg:hidden xl:block">
               <ButtonLink href="/contact" arrow>
                 Get a Free Consultation
