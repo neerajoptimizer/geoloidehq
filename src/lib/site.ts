@@ -315,15 +315,15 @@ export const processSteps = [
 ];
 
 export const industries = [
-  "Manufacturing & Export",
-  "Retail & E-commerce",
-  "Healthcare",
-  "Education",
-  "Real Estate",
-  "Logistics",
-  "Professional Services",
-  "Hospitality",
-];
+  { name: "Manufacturing & Export", icon: "factory", body: "B2B websites and global lead generation for exporters." },
+  { name: "Retail & E-commerce", icon: "shopping", body: "Online stores, performance ads and marketplace growth." },
+  { name: "Healthcare", icon: "health", body: "Patient-friendly websites and appointment booking." },
+  { name: "Education", icon: "education", body: "Admissions campaigns, portals and student engagement." },
+  { name: "Real Estate", icon: "realestate", body: "Lead-focused property listings and ad campaigns." },
+  { name: "Logistics", icon: "logistics", body: "Tracking, automation and operations dashboards." },
+  { name: "Professional Services", icon: "professional", body: "Authority websites and steady client acquisition." },
+  { name: "Hospitality", icon: "hospitality", body: "Direct bookings and social-first marketing." },
+] as const;
 
 export const homeFaqs = [
   {

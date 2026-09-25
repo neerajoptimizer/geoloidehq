@@ -1,6 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
+  ArrowRight,
   BarChart3,
+  Briefcase,
+  Building2,
+  Factory,
+  GraduationCap,
+  Hotel,
+  ShoppingBag,
+  Stethoscope,
+  Truck,
   CheckCircle2,
   Globe2,
   Handshake,
@@ -78,6 +88,17 @@ const reasons = [
     body: "Strategists, designers and engineers who treat your business like their own.",
   },
 ];
+
+const industryIcons = {
+  factory: Factory,
+  shopping: ShoppingBag,
+  health: Stethoscope,
+  education: GraduationCap,
+  realestate: Building2,
+  logistics: Truck,
+  professional: Briefcase,
+  hospitality: Hotel,
+};
 
 const heroWords = ["Get", "your", "business"];
 
@@ -371,29 +392,53 @@ export default async function Home() {
       <ProcessSection />
 
       {/* Industries */}
-      <section className="py-20 sm:py-24">
-        <Container>
+      <section className="relative overflow-hidden bg-gradient-to-b from-white via-brand-50/40 to-white py-20 sm:py-24">
+        <div className="pointer-events-none absolute top-1/2 left-1/2 size-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-200/30 blur-3xl" />
+        <Container className="relative">
           <SectionHeading
             eyebrow="Industries"
             title="Experience across sectors"
             description="We bring proven playbooks to businesses of every size — from ambitious start-ups to established enterprises."
           />
+          <ul className="mt-12 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-4 lg:grid-cols-4 lg:gap-5">
+            {industries.map((industry, i) => {
+              const Icon = industryIcons[industry.icon];
+              return (
+                <li
+                  key={industry.name}
+                  data-reveal
+                  style={revealDelay(i % 4, 90)}
+                  className="group relative isolate overflow-hidden rounded-2xl bg-white/80 p-4 ring-1 sm:rounded-3xl ring-ink-100 backdrop-blur transition duration-500 hover:-translate-y-1.5 hover:bg-ink-900 hover:shadow-2xl hover:shadow-ink-900/20 hover:ring-ink-900 sm:p-6"
+                >
+                  <span
+                    aria-hidden
+                    className="absolute -top-16 -right-16 -z-10 size-40 scale-50 rounded-full bg-brand-500/25 opacity-0 blur-2xl transition duration-500 group-hover:scale-100 group-hover:opacity-100"
+                  />
+                  <div className="flex items-start justify-between">
+                    <span className="grid size-10 place-items-center rounded-xl bg-brand-50 text-brand-600 ring-1 sm:size-12 sm:rounded-2xl ring-brand-100 transition duration-500 group-hover:rotate-6 group-hover:bg-brand-500 group-hover:text-white group-hover:ring-brand-400">
+                      <Icon className="size-5 sm:size-6" aria-hidden />
+                    </span>
+                    <span className="font-display text-sm font-bold text-ink-200 transition group-hover:text-white/30">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-sm leading-snug font-bold transition group-hover:text-white sm:mt-6 sm:text-lg">{industry.name}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-ink-500 transition group-hover:text-ink-300 sm:mt-2 sm:text-sm">
+                    {industry.body}
+                  </p>
+                  <span className="mt-4 block h-0.5 w-8 sm:mt-5 sm:w-10 rounded-full bg-brand-500 transition-all duration-500 group-hover:w-full" />
+                </li>
+              );
+            })}
+          </ul>
+          <p data-reveal className="mt-10 text-center text-ink-600">
+            Don&apos;t see your industry? Our playbooks adapt to any business.{" "}
+            <Link href="/contact" className="group inline-flex items-center gap-1 font-semibold text-brand-700 hover:text-brand-800">
+              Let&apos;s talk
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+            </Link>
+          </p>
         </Container>
-        <div className="mt-12 space-y-4">
-          {[false, true].map((reverse) => (
-            <Marquee
-              key={String(reverse)}
-              reverse={reverse}
-              items={reverse ? [...industries].reverse() : industries}
-              renderItem={(industry) => (
-                <span className="inline-flex items-center gap-3 rounded-2xl bg-white px-6 py-4 font-display text-lg font-semibold text-ink-800 ring-1 ring-ink-100 transition hover:bg-brand-50 hover:text-brand-700 hover:ring-brand-200">
-                  <span className="size-2 rounded-full bg-brand-500" />
-                  {industry}
-                </span>
-              )}
-            />
-          ))}
-        </div>
       </section>
 
       <TestimonialsSection />

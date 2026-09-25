@@ -209,5 +209,9 @@
   /* Without auto-scroll, let visitors swipe/scroll marquee rows themselves. */
   .marquee {
     overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .marquee::-webkit-scrollbar {
+    display: none;
   }
 }
