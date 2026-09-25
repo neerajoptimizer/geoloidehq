@@ -1,4 +1,5 @@
 import { CtaBanner, PageHero } from "@/components/sections";
+import { GoogleBadge, GoogleReviewCard } from "@/components/google-badge";
 import { JsonLd } from "@/components/seo";
 import { FeaturedTestimonial, TestimonialSummary } from "@/components/testimonials";
 import { TestimonialsBrowser } from "@/components/testimonials-browser";
@@ -46,6 +47,7 @@ export default function TestimonialsPage() {
         <ButtonLink href="#all-reviews" variant="outline">
           Read all reviews
         </ButtonLink>
+        <GoogleBadge className="py-2" />
       </PageHero>
 
       <section className="pb-20 sm:pb-24">
@@ -76,6 +78,7 @@ export default function TestimonialsPage() {
           <div className="mt-10">
             <TestimonialsBrowser items={reviews} categories={reviewCategories} />
           </div>
+          <GoogleReviewCard className="mx-auto mt-12 max-w-3xl" />
         </Container>
       </section>
 

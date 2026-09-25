@@ -121,7 +121,7 @@ const structuredData = {
         areaServed: "Worldwide",
       },
       department: offices.map((o) => ({ "@id": `${site.url}/#${o.id}` })),
-      sameAs: site.social.map((s) => s.href),
+      sameAs: [...site.social.map((s) => s.href), site.google.knowledgeGraphUrl],
     },
     ...offices.map((o) => ({
       "@type": "ProfessionalService",

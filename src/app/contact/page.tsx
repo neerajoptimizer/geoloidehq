@@ -1,5 +1,6 @@
 import { Clock, Globe, Mail, MapPin } from "lucide-react";
 import { PageHero } from "@/components/sections";
+import { GoogleReviewCard } from "@/components/google-badge";
 import { JsonLd } from "@/components/seo";
 import { Container } from "@/components/ui";
 import { pageMetadata, webPageSchema } from "@/lib/seo";
@@ -105,6 +106,8 @@ export default function ContactPage() {
                 </p>
               </div>
             </div>
+
+            <GoogleReviewCard className="rounded-[2rem]" />
 
             {site.offices.map((o) => (
               <div key={o.label} className="overflow-hidden rounded-[2rem] ring-1 ring-ink-100">

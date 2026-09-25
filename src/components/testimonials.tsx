@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, BadgeCheck, Building2, Quote } from "lucide-react";
 import { revealDelay } from "@/lib/motion";
 import { attribution, testimonials, type Testimonial } from "@/lib/testimonials";
+import { GoogleBadge } from "./google-badge";
 import { Marquee } from "./marquee";
 import { ButtonLink, Container, SectionHeading, cn } from "./ui";
 
@@ -225,7 +226,10 @@ export function TestimonialsSection() {
             title="Trusted by growing businesses"
             description="Here's what founders and business owners say about working with Geoloide."
           />
-          <TestimonialSummary className="w-full max-w-xs shrink-0" />
+          <div className="flex w-full max-w-xs shrink-0 flex-col gap-3">
+            <TestimonialSummary />
+            <GoogleBadge className="w-full" />
+          </div>
         </div>
       </Container>
       <Marquee

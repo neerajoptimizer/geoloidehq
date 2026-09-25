@@ -32,7 +32,16 @@ export const site = {
     { name: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/company/geoloide" },
     { name: "Instagram", icon: "instagram", href: "https://www.instagram.com/geoloidehq/" },
     { name: "Facebook", icon: "facebook", href: "https://www.facebook.com/p/Geoloide-Pvt-Ltd-61552338420812/" },
+    { name: "Google", icon: "google", href: "https://share.google/rZZoZNxSQ2yPyrUdZ" },
   ],
+  // Google Business Profile. Add the real rating/review count to show stars on the Google badge.
+  google: {
+    profileUrl: "https://share.google/rZZoZNxSQ2yPyrUdZ",
+    /** Stable Knowledge Graph URL for the business (used in schema.org sameAs). */
+    knowledgeGraphUrl: "https://www.google.com/search?kgmid=/g/11q2t331lq",
+    rating: undefined as number | undefined,
+    reviewCount: undefined as number | undefined,
+  },
   areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "Canada", "Singapore"],
   offices: [
     {
