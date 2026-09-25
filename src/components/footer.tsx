@@ -123,9 +123,15 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-ink-400 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} {site.legalName}. All rights reserved.
-          </p>
+          <div className="space-y-1">
+            <p>
+              © {new Date().getFullYear()} {site.legalName}. All rights reserved.
+            </p>
+            <p className="text-ink-500">
+              CIN: <span className="font-mono">{site.company.cin}</span> · GSTIN:{" "}
+              <span className="font-mono">{site.company.gstin}</span> · Incorporated {site.company.incorporatedDisplay}
+            </p>
+          </div>
           <p>
             {site.descriptor} · <span className="text-brand-400">{site.tagline}</span>
           </p>

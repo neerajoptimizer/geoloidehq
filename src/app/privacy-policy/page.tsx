@@ -1,3 +1,4 @@
+import { LegalCompanyDetails } from "@/components/company-info";
 import { LegalPage } from "@/components/legal";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -17,6 +18,13 @@ export default function PrivacyPolicyPage() {
           {site.legalName} (&quot;Geoloide&quot;, &quot;we&quot;, &quot;us&quot;) respects your privacy. This policy
           explains what information we collect through {site.url}, how we use it and the choices you have.
         </p>
+
+        <h2>Who we are</h2>
+        <p>
+          This website is operated by {site.legalName}, which is the Data Fiduciary responsible for your personal data
+          under the Digital Personal Data Protection Act, 2023.
+        </p>
+        <LegalCompanyDetails />
 
         <h2>Information we collect</h2>
         <ul>
@@ -63,7 +71,7 @@ export default function PrivacyPolicyPage() {
           <a href={`mailto:${site.email}`} className="font-semibold text-brand-700">
             {site.email}
           </a>{" "}
-          or write to us at Level 10, Plot No. 18-20, HT House, KG Marg, New Delhi, Delhi 110001.
+          or write to us at {site.legalName}, {site.offices[0].lines.join(", ")} (CIN: {site.company.cin}).
         </p>
       </section>
     </LegalPage>

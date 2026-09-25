@@ -95,6 +95,15 @@ export default function ContactPage() {
                   </div>
                 </li>
               </ul>
+              <div className="mt-8 border-t border-white/10 pt-6 text-sm">
+                <p className="font-semibold text-white">{site.legalName}</p>
+                <p className="mt-1 text-ink-400">
+                  CIN: <span className="font-mono text-ink-200">{site.company.cin}</span>
+                </p>
+                <p className="text-ink-400">
+                  GSTIN: <span className="font-mono text-ink-200">{site.company.gstin}</span>
+                </p>
+              </div>
             </div>
 
             {site.offices.map((o) => (
