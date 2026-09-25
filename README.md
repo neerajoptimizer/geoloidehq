@@ -81,6 +81,18 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXX                 # Google Analytics 4 measurement ID
 5. Replace placeholder stats, testimonials and roles with real data; add case studies and blog content over time.
 6. Validate structured data with the [Rich Results Test](https://search.google.com/test/rich-results).
 
+## Images & animations
+
+- **Images** live in `src/assets/images` and are registered with alt text in
+  [`src/lib/images.ts`](src/lib/images.ts). They are stock photos (Unsplash licence — free for commercial use,
+  no attribution required). To swap one, replace the file (keep the name) or point the entry at a new file.
+  Next.js serves them as responsive AVIF/WebP with blur-up placeholders; they are also listed in the image sitemap.
+- **Scroll reveal:** add `data-reveal` (optionally `="left" | "right" | "zoom"`) to any element, and
+  `style={revealDelay(i)}` from `src/lib/motion.ts` to stagger lists. Content stays in the HTML for SEO and
+  is shown immediately if JavaScript is off or the visitor prefers reduced motion.
+- Other effects: `CountUp`, `ScrollProgress`, `ScrollLine` (`src/components/motion.tsx`) and `Marquee`
+  (`src/components/marquee.tsx`); keyframes are defined in `src/app/globals.css`.
+
 ## Brand
 
 - Green `#1DB954` (`brand-500`), Ink `#231E23` (`ink-900`)

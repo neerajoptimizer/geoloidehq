@@ -361,3 +361,6 @@ export const homeFaqs = [
     a: "Book a free 30-minute consultation through our contact page or email contact@geoloide.com. We will review your goals and recommend a practical plan.",
   },
 ];
+
+/** Every platform across our service stacks, de-duplicated — used for the tools marquee. */
+export const tools = [...new Set(services.flatMap((s) => s.stack))];

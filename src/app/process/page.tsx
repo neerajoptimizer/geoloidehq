@@ -1,6 +1,8 @@
 import { CalendarCheck, ClipboardList, LineChart, MessagesSquare, Rocket, Search } from "lucide-react";
 import { CtaBanner, Faq, PageHero } from "@/components/sections";
+import { ScrollLine } from "@/components/motion";
 import { JsonLd } from "@/components/seo";
+import { images } from "@/lib/images";
 import { ButtonLink, Container, SectionHeading } from "@/components/ui";
 import { faqSchema, pageMetadata, webPageSchema } from "@/lib/seo";
 
@@ -92,6 +94,7 @@ export default function ProcessPage() {
         }
         description="A repeatable approach refined over hundreds of projects — so you always know what's happening, what's next and how it moves your business forward."
         breadcrumbs={[{ name: "Our Process", path: seo.path }]}
+        image={images.teamPresentation}
       >
         <ButtonLink href="/contact" arrow>
           Book your consultation
@@ -100,13 +103,15 @@ export default function ProcessPage() {
 
       <section className="py-24">
         <Container>
-          <ol className="relative mx-auto max-w-4xl space-y-8 before:absolute before:top-4 before:bottom-4 before:left-7 before:w-px before:bg-ink-200 sm:before:left-8">
+          <div className="relative mx-auto max-w-4xl">
+            <ScrollLine className="absolute top-4 bottom-4 left-[27px] w-0.5 sm:left-[31px]" />
+            <ol className="relative space-y-8">
             {phases.map((p, i) => (
-              <li key={p.title} className="relative flex gap-6 sm:gap-8">
-                <span className="relative z-10 grid size-14 shrink-0 place-items-center rounded-2xl bg-brand-500 text-white shadow-lg shadow-brand-500/30 sm:size-16">
+              <li key={p.title} data-reveal="right" className="group relative flex gap-4 sm:gap-8">
+                <span className="relative z-10 grid size-14 shrink-0 place-items-center rounded-2xl bg-brand-500 text-white shadow-lg ring-4 shadow-brand-500/30 ring-white transition duration-300 group-hover:scale-110 group-hover:rotate-3 sm:size-16">
                   <p.icon className="size-6 sm:size-7" aria-hidden />
                 </span>
-                <div className="flex-1 rounded-3xl bg-white p-6 ring-1 ring-ink-100 sm:p-8">
+                <div className="min-w-0 flex-1 rounded-3xl bg-white p-5 ring-1 ring-ink-100 transition duration-300 group-hover:shadow-xl group-hover:shadow-brand-500/10 group-hover:ring-brand-200 sm:p-8">
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="font-display text-sm font-bold text-ink-400">Step {i + 1}</span>
                     <span className="rounded-full bg-brand-50 px-3 py-0.5 text-xs font-semibold text-brand-700">
@@ -125,7 +130,8 @@ export default function ProcessPage() {
                 </div>
               </li>
             ))}
-          </ol>
+            </ol>
+          </div>
         </Container>
       </section>
 

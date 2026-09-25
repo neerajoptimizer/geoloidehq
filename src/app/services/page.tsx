@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { CtaBanner, PageHero, ProcessSection } from "@/components/sections";
 import { JsonLd } from "@/components/seo";
+import { images, serviceImages } from "@/lib/images";
 import { ButtonLink, Container, ServiceIcon } from "@/components/ui";
 import { absoluteUrl, pageMetadata, webPageSchema } from "@/lib/seo";
 import { services } from "@/lib/site";
@@ -35,26 +37,43 @@ export default function ServicesPage() {
         }
         description="Three tightly connected capabilities, delivered by one team. Engage us for a single service or as your end-to-end growth partner."
         breadcrumbs={[{ name: "Services", path: seo.path }]}
+        image={images.strategyWorkshop}
       >
         <ButtonLink href="/contact" arrow>
           Discuss your project
         </ButtonLink>
       </PageHero>
 
-      <section className="py-24">
+      <section className="py-20 sm:py-24">
         <Container className="space-y-8">
           {services.map((s, i) => (
             <article
               key={s.slug}
               id={s.slug}
-              className="grid overflow-hidden rounded-[2rem] ring-1 ring-ink-100 lg:grid-cols-5"
+              data-reveal
+              className="group grid scroll-mt-32 overflow-hidden rounded-[2rem] ring-1 ring-ink-100 transition duration-500 hover:shadow-2xl hover:shadow-ink-900/10 lg:grid-cols-5"
             >
               <div
-                className={`relative flex flex-col justify-between gap-10 p-8 sm:p-12 lg:col-span-2 ${
-                  i % 2 === 0 ? "bg-ink-900" : "bg-brand-500"
+                className={`relative isolate flex flex-col justify-between gap-10 overflow-hidden p-8 sm:p-12 lg:col-span-2 ${
+                  i % 2 === 0 ? "bg-ink-900" : "bg-brand-600"
                 }`}
               >
-                <span className="grid size-16 place-items-center rounded-2xl bg-white/10 text-white ring-1 ring-white/20">
+                <Image
+                  src={serviceImages[s.slug].card.src}
+                  alt={serviceImages[s.slug].card.alt}
+                  fill
+                  placeholder="blur"
+                  sizes="(min-width: 1024px) 480px, 100vw"
+                  className="-z-20 object-cover transition duration-700 group-hover:scale-105"
+                />
+                <div
+                  className={`absolute inset-0 -z-10 ${
+                    i % 2 === 0
+                      ? "bg-gradient-to-t from-ink-900 via-ink-900/85 to-ink-900/60"
+                      : "bg-gradient-to-t from-brand-700 via-brand-600/90 to-brand-600/70"
+                  }`}
+                />
+                <span className="grid size-16 place-items-center rounded-2xl bg-white/10 text-white ring-1 ring-white/20 backdrop-blur">
                   <ServiceIcon icon={s.icon} className="size-8" />
                 </span>
                 <div>
