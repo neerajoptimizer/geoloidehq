@@ -46,10 +46,10 @@ export function Header() {
     <header className="sticky top-0 z-50">
       <div className="hidden bg-ink-900 text-xs text-ink-300 md:block">
         <Container className="flex h-9 items-center justify-between">
-          <p>
+          <p className="hidden lg:block">
             {site.descriptor} · <span className="text-brand-400">{site.tagline}</span>
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex w-full items-center justify-center gap-6 whitespace-nowrap lg:w-auto lg:justify-end">
             <a
               href={whatsappUrl()}
               target="_blank"
@@ -63,7 +63,7 @@ export function Header() {
               <Mail className="size-3.5" aria-hidden />
               {site.email}
             </a>
-            <span className="inline-flex items-center gap-1.5">
+            <span className="hidden items-center gap-1.5 lg:inline-flex">
               <MapPin className="size-3.5" aria-hidden />
               New Delhi · Noida
             </span>

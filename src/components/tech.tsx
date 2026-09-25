@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
-import { getTech, isDarkColor, isLightColor, techCategories, techStack, type Tech } from "@/lib/tech";
+import { ChevronDown } from "lucide-react";
+import { getTech, isDarkColor, isLightColor, techCategories, techShowcase, techStack, type Tech } from "@/lib/tech";
 import { Container, SectionHeading, cn } from "./ui";
 
 /** Brand logo tile. Light brand colours get a solid tile with a dark glyph for contrast. */
@@ -81,10 +82,12 @@ export function TechStackSection() {
         </fieldset>
 
         <ul className="mt-10 grid grid-cols-3 gap-2.5 sm:grid-cols-4 sm:gap-4 lg:grid-cols-6">
-          {techStack.map((tech) => (
+          {techShowcase.map((tech, i) => (
             <li
               key={tech.name}
               data-tech-cat={tech.category}
+              // Collapsed "All" view shows one row: 6 tiles (phone/desktop) or 8 (tablet, 4 columns).
+              data-tech-extra={i >= 8 ? "all" : i >= 6 ? "wide" : undefined}
               style={{ "--brand": `#${tech.hex}` } as CSSProperties}
               className="group relative flex flex-col items-center gap-2.5 rounded-2xl bg-white px-2 py-4 text-center ring-1 ring-ink-100 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_var(--brand)] hover:ring-[var(--brand)] sm:rounded-3xl sm:py-6"
             >
@@ -93,6 +96,15 @@ export function TechStackSection() {
             </li>
           ))}
         </ul>
+
+        <div className="tech-more-toggle mt-10 flex justify-center">
+          <label className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-ink-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-ink-900/20 transition hover:-translate-y-0.5 hover:bg-brand-600 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brand-500">
+            <input type="checkbox" className="peer sr-only" data-tech-more aria-label="Show all technologies" />
+            <span className="peer-checked:hidden">View all {techStack.length} tools</span>
+            <span className="hidden peer-checked:inline">Show less</span>
+            <ChevronDown className="size-4 transition-transform peer-checked:rotate-180" aria-hidden />
+          </label>
+        </div>
       </Container>
     </section>
   );

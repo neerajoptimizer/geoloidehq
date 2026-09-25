@@ -99,6 +99,14 @@ export const techStack: Tech[] = [
   { name: "Gemini", category: "ai", ...icon(siGooglegemini) },
 ];
 
+/** Shown first in the collapsed "All" view — one highlight from each area, then everything else. */
+const highlights = ["Google Ads", "Next.js", "Shopify", "HubSpot", "Meta Ads", "React", "WordPress", "Zoho"];
+
+export const techShowcase: Tech[] = [
+  ...highlights.map((n) => techStack.find((t) => t.name === n)!),
+  ...techStack.filter((t) => !highlights.includes(t.name)),
+];
+
 export function getTech(name: string) {
   return techStack.find((t) => t.name === name);
 }
