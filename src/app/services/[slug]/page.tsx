@@ -3,8 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { CtaBanner, Faq, PageHero } from "@/components/sections";
+import { JsonLd } from "@/components/seo";
 import { ButtonLink, Container, SectionHeading, ServiceIcon } from "@/components/ui";
-import { getService, services } from "@/lib/site";
+import { absoluteUrl, faqSchema, ORG_ID, pageMetadata, webPageSchema } from "@/lib/seo";
+import { getService, services, site } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -16,7 +18,11 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]">
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
-  return { title: service.title, description: service.short };
+  return pageMetadata({
+    ...service.seo,
+    path: `/services/${service.slug}`,
+    image: `/services/${service.slug}/opengraph-image`,
+  });
 }
 
 export default async function ServicePage({ params }: PageProps<"/services/[slug]">) {
@@ -25,10 +31,38 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
   if (!service) notFound();
 
   const others = services.filter((s) => s.slug !== service.slug);
+  const path = `/services/${service.slug}`;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${absoluteUrl(path)}#service`,
+    name: service.title,
+    serviceType: service.title,
+    description: service.seo.description,
+    url: absoluteUrl(path),
+    provider: { "@id": ORG_ID },
+    areaServed: site.areaServed.map((name) => ({ "@type": "Country", name })),
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: service.title,
+      itemListElement: service.offerings.map((o) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: o.title, description: o.body },
+      })),
+    },
+  };
 
   return (
     <>
-      <PageHero eyebrow={service.title} title={service.headline} description={service.intro}>
+      <PageHero
+        eyebrow={service.title}
+        title={service.headline}
+        description={service.intro}
+        breadcrumbs={[
+          { name: "Services", path: "/services" },
+          { name: service.title, path },
+        ]}
+      >
         <ButtonLink href="/contact" arrow>
           Get a free proposal
         </ButtonLink>
@@ -146,6 +180,13 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
       </section>
 
       <CtaBanner title={`Let's talk about ${service.title.toLowerCase()}`} />
+      <JsonLd
+        data={[
+          webPageSchema({ name: service.seo.title, description: service.seo.description, path }),
+          serviceSchema,
+          faqSchema(service.faqs),
+        ]}
+      />
     </>
   );
 }

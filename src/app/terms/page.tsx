@@ -1,12 +1,17 @@
-import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Terms of Service" };
+export const metadata = pageMetadata({
+  title: "Terms of Service",
+  description:
+    "Terms and conditions governing the use of geoloide.com, the website of Geoloide Private Limited, including intellectual property, liability and governing law.",
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (
-    <LegalPage title="Terms of Service" updated="September 2026">
+    <LegalPage title="Terms of Service" path="/terms" updated="September 2026">
       <section>
         <p>
           These terms govern your use of {site.url}, operated by {site.legalName}. By using this website you agree to

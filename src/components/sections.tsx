@@ -2,17 +2,20 @@ import Link from "next/link";
 import { ArrowRight, ChevronDown, Quote } from "lucide-react";
 import type { ReactNode } from "react";
 import { processSteps, testimonials, type Service } from "@/lib/site";
+import { Breadcrumbs } from "./seo";
 import { ButtonLink, Container, Eyebrow, SectionHeading, ServiceIcon } from "./ui";
 
 export function PageHero({
   eyebrow,
   title,
   description,
+  breadcrumbs,
   children,
 }: {
   eyebrow: string;
   title: ReactNode;
   description: ReactNode;
+  breadcrumbs?: { name: string; path: string }[];
   children?: ReactNode;
 }) {
   return (
@@ -21,6 +24,7 @@ export function PageHero({
       <div className="pointer-events-none absolute -top-40 -right-40 size-[32rem] rounded-full bg-brand-300/30 blur-3xl" />
       <Container className="relative py-20 sm:py-24 lg:py-28">
         <div className="max-w-3xl animate-fade-up">
+          {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
           <Eyebrow>{eyebrow}</Eyebrow>
           <h1 className="mt-5 text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl">{title}</h1>
           <p className="mt-6 max-w-2xl text-lg text-pretty text-ink-500 sm:text-xl">{description}</p>

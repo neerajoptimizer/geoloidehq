@@ -41,7 +41,7 @@ export function Footer() {
 
           <div className="grid gap-10 sm:grid-cols-3 lg:col-span-5">
             <div>
-              <h3 className="text-sm font-semibold text-white">Services</h3>
+              <h2 className="text-sm font-semibold text-white">Services</h2>
               <ul className="mt-4 space-y-3 text-sm">
                 {services.map((s) => (
                   <li key={s.slug}>
@@ -53,7 +53,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-white">Company</h3>
+              <h2 className="text-sm font-semibold text-white">Company</h2>
               <ul className="mt-4 space-y-3 text-sm">
                 {companyLinks.map((l) => (
                   <li key={l.href}>
@@ -65,7 +65,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-white">Legal</h3>
+              <h2 className="text-sm font-semibold text-white">Legal</h2>
               <ul className="mt-4 space-y-3 text-sm">
                 {legalLinks.map((l) => (
                   <li key={l.href}>
@@ -81,7 +81,7 @@ export function Footer() {
           <div className="space-y-6 lg:col-span-3">
             {site.offices.map((o) => (
               <div key={o.label}>
-                <h3 className="text-sm font-semibold text-white">{o.label}</h3>
+                <h2 className="text-sm font-semibold text-white">{o.label}</h2>
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(o.mapQuery)}`}
                   target="_blank"

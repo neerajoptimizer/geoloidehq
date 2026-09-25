@@ -1,13 +1,21 @@
-import type { Metadata } from "next";
 import { BookOpen, Briefcase, Clock, Coffee, Globe2, MapPin, TrendingUp } from "lucide-react";
 import { PageHero } from "@/components/sections";
+import { JsonLd } from "@/components/seo";
 import { ButtonLink, Container, SectionHeading } from "@/components/ui";
+import { pageMetadata, webPageSchema } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Careers",
-  description: "Join Geoloide and help businesses go global. Explore open roles in marketing, design, engineering and operations.",
+const seo = {
+  title: "Careers – Marketing & Tech Jobs in Noida & Delhi",
+  description:
+    "Build your career at Geoloide. Explore digital marketing, SEO, web development, UI/UX design and automation jobs in Noida and New Delhi. Apply today.",
+  path: "/careers",
 };
+
+export const metadata = pageMetadata({
+  ...seo,
+  keywords: ["digital marketing jobs Noida", "web developer jobs Noida", "SEO jobs Delhi", "careers at Geoloide"],
+});
 
 const perks = [
   { icon: TrendingUp, title: "Fast growth", body: "Own meaningful work early and grow with a scaling company." },
@@ -36,6 +44,7 @@ export default function CareersPage() {
           </>
         }
         description="We're a team of marketers, designers, engineers and consultants helping businesses grow beyond borders. If you love solving real problems, you'll fit right in."
+        breadcrumbs={[{ name: "Careers", path: seo.path }]}
       >
         <ButtonLink href="#open-roles" arrow>
           View open roles
@@ -101,6 +110,7 @@ export default function CareersPage() {
           </p>
         </Container>
       </section>
+      <JsonLd data={webPageSchema({ name: seo.title, description: seo.description, path: seo.path })} />
     </>
   );
 }

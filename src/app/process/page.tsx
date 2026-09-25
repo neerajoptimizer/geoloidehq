@@ -1,12 +1,20 @@
-import type { Metadata } from "next";
 import { CalendarCheck, ClipboardList, LineChart, MessagesSquare, Rocket, Search } from "lucide-react";
 import { CtaBanner, Faq, PageHero } from "@/components/sections";
+import { JsonLd } from "@/components/seo";
 import { ButtonLink, Container, SectionHeading } from "@/components/ui";
+import { faqSchema, pageMetadata, webPageSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Our Process",
-  description: "How Geoloide takes projects from discovery to launch and continuous growth.",
+const seo = {
+  title: "Our Process – How We Deliver Measurable Results",
+  description:
+    "See how Geoloide runs projects: free consultation, discovery, strategy, agile design & build, launch and ongoing optimisation — transparent from day one.",
+  path: "/process",
 };
+
+export const metadata = pageMetadata({
+  ...seo,
+  keywords: ["digital agency process", "web development process", "marketing strategy roadmap", "agile project delivery"],
+});
 
 const phases = [
   {
@@ -83,6 +91,7 @@ export default function ProcessPage() {
           </>
         }
         description="A repeatable approach refined over hundreds of projects — so you always know what's happening, what's next and how it moves your business forward."
+        breadcrumbs={[{ name: "Our Process", path: seo.path }]}
       >
         <ButtonLink href="/contact" arrow>
           Book your consultation
@@ -130,6 +139,7 @@ export default function ProcessPage() {
       </section>
 
       <CtaBanner />
+      <JsonLd data={[webPageSchema({ name: seo.title, description: seo.description, path: seo.path }), faqSchema(faqs)]} />
     </>
   );
 }

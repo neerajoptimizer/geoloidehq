@@ -7,6 +7,11 @@ export const site = {
     "Geoloide Private Limited is a management partner for growing businesses — delivering digital marketing, website & app development, and business simplification & automation that take brands global.",
   url: "https://www.geoloide.com",
   email: "contact@geoloide.com",
+  foundingLocation: "New Delhi, India",
+  hours: "Mon – Sat, 10:00 AM – 7:00 PM IST",
+  // Official social profile URLs (LinkedIn, Instagram, X, Facebook…) — used for schema.org sameAs.
+  social: [] as string[],
+  areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "Canada", "Singapore"],
   offices: [
     {
       label: "Registered Office",
@@ -16,7 +21,7 @@ export const site = {
     {
       label: "Operations Office",
       lines: ["C 266, near Hindi Khabar", "C Block, Noida", "Uttar Pradesh 201301"],
-      mapQuery: "C 266, C Block, Sector 10, Noida, Uttar Pradesh 201301",
+      mapQuery: "C 266, C Block, near Hindi Khabar, Noida, Uttar Pradesh 201301",
     },
   ],
 } as const;
@@ -42,6 +47,7 @@ export type Service = {
   headline: string;
   intro: string;
   icon: "megaphone" | "code" | "workflow";
+  seo: { title: string; description: string; keywords: string[] };
   offerings: { title: string; body: string }[];
   outcomes: string[];
   stack: string[];
@@ -58,6 +64,21 @@ export const services: Service[] = [
     intro:
       "We build full-funnel marketing engines — from search visibility to paid acquisition and retention — so every rupee you spend is tracked, optimised and tied to pipeline.",
     icon: "megaphone",
+    seo: {
+      title: "Digital Marketing Agency in Delhi NCR – SEO & Ads",
+      description:
+        "Results-driven digital marketing agency in Delhi & Noida. SEO, Google Ads, Meta ads, social media and content marketing that grow leads and revenue globally.",
+      keywords: [
+        "digital marketing agency in Delhi",
+        "digital marketing company in Noida",
+        "SEO services in Delhi NCR",
+        "PPC management",
+        "Google Ads agency",
+        "social media marketing agency",
+        "performance marketing",
+        "international SEO",
+      ],
+    },
     offerings: [
       {
         title: "Search Engine Optimisation",
@@ -115,6 +136,21 @@ export const services: Service[] = [
     intro:
       "From brand websites to complex web platforms and native-quality mobile apps, our design and engineering team ships fast, secure, accessible products that your customers love to use.",
     icon: "code",
+    seo: {
+      title: "Website & App Development Company in Delhi NCR",
+      description:
+        "Custom website, e-commerce and mobile app development in Delhi & Noida. Fast, SEO-ready Next.js, React Native and Flutter builds that convert visitors.",
+      keywords: [
+        "website development company in Delhi",
+        "web development company in Noida",
+        "mobile app development company",
+        "e-commerce website development",
+        "Next.js development",
+        "React Native app development",
+        "Flutter app development",
+        "UI UX design agency",
+      ],
+    },
     offerings: [
       {
         title: "Corporate & Brand Websites",
@@ -172,6 +208,21 @@ export const services: Service[] = [
     intro:
       "We map how your business actually runs, remove friction and automate repetitive tasks — connecting your tools so information flows and your people focus on work that matters.",
     icon: "workflow",
+    seo: {
+      title: "Business Process Automation & CRM Services",
+      description:
+        "Simplify and automate your business with process redesign, Zoho/HubSpot CRM, ERP integration, AI assistants and BI dashboards. Save hours every week.",
+      keywords: [
+        "business process automation services",
+        "workflow automation company India",
+        "CRM implementation services",
+        "Zoho consultant Delhi",
+        "HubSpot implementation partner",
+        "ERP integration",
+        "AI chatbot development",
+        "Power BI dashboard services",
+      ],
+    },
     offerings: [
       {
         title: "Process Mapping & Redesign",
@@ -282,4 +333,27 @@ export const industries = [
   "Logistics",
   "Professional Services",
   "Hospitality",
+];
+
+export const homeFaqs = [
+  {
+    q: "What does Geoloide do?",
+    a: "Geoloide Private Limited is a management partner solutions company based in New Delhi and Noida. We help businesses grow through digital marketing, website and mobile app development, and business simplification and automation.",
+  },
+  {
+    q: "Is Geoloide a digital marketing agency in Delhi NCR?",
+    a: "Yes. Our registered office is at HT House, KG Marg, New Delhi and our operations team works from Noida. We serve clients across Delhi NCR, India and international markets.",
+  },
+  {
+    q: "Do you work with businesses outside India?",
+    a: "Absolutely. Helping businesses go global is our specialty — we run international SEO and ad campaigns, build multi-currency e-commerce and work across time zones.",
+  },
+  {
+    q: "How much does a website or marketing engagement cost?",
+    a: "Every business is different, so we share a transparent, itemised proposal after a free consultation. We offer fixed-price projects and flexible monthly retainers.",
+  },
+  {
+    q: "How do I get started?",
+    a: "Book a free 30-minute consultation through our contact page or email contact@geoloide.com. We will review your goals and recommend a practical plan.",
+  },
 ];

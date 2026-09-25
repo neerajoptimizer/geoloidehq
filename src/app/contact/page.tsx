@@ -1,14 +1,22 @@
-import type { Metadata } from "next";
 import { Clock, Globe, Mail, MapPin } from "lucide-react";
 import { PageHero } from "@/components/sections";
+import { JsonLd } from "@/components/seo";
 import { Container } from "@/components/ui";
+import { pageMetadata, webPageSchema } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { ContactForm } from "./contact-form";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-  description: `Get in touch with ${site.legalName}. Offices in New Delhi and Noida. Email ${site.email}.`,
+const seo = {
+  title: "Contact Us – Book a Free Consultation",
+  description:
+    "Contact Geoloide for digital marketing, web & app development or business automation. Offices at KG Marg, New Delhi and Noida. Email contact@geoloide.com.",
+  path: "/contact",
 };
+
+export const metadata = pageMetadata({
+  ...seo,
+  keywords: ["contact Geoloide", "digital marketing agency near me", "web development company New Delhi", "Noida IT company contact"],
+});
 
 export default function ContactPage() {
   return (
@@ -21,6 +29,7 @@ export default function ContactPage() {
           </>
         }
         description="Tell us about your goals and we'll get back within one business day with next steps and a free consultation slot."
+        breadcrumbs={[{ name: "Contact Us", path: seo.path }]}
       />
 
       <section className="pb-24">
@@ -63,7 +72,7 @@ export default function ContactPage() {
                   </span>
                   <div>
                     <p className="text-sm text-ink-400">Business hours</p>
-                    <p className="font-semibold text-white">Mon – Sat, 10:00 AM – 7:00 PM IST</p>
+                    <p className="font-semibold text-white">{site.hours}</p>
                   </div>
                 </li>
               </ul>
@@ -94,6 +103,7 @@ export default function ContactPage() {
           </aside>
         </Container>
       </section>
+      <JsonLd data={webPageSchema({ type: "ContactPage", name: seo.title, description: seo.description, path: seo.path })} />
     </>
   );
 }

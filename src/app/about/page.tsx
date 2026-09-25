@@ -1,13 +1,21 @@
-import type { Metadata } from "next";
 import { Compass, Eye, Gem, HeartHandshake, Lightbulb, MapPin, Target } from "lucide-react";
 import { CtaBanner, PageHero } from "@/components/sections";
+import { JsonLd } from "@/components/seo";
 import { ButtonLink, Container, SectionHeading } from "@/components/ui";
+import { pageMetadata, webPageSchema } from "@/lib/seo";
 import { site, stats } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "About Us",
-  description: `Learn about ${site.legalName} — a management partner helping businesses grow globally through marketing, technology and automation.`,
+const seo = {
+  title: "About Us – Management Partner Solutions in Delhi",
+  description:
+    "Meet Geoloide, a New Delhi & Noida management partner uniting digital marketing, web & app development and automation to help businesses go global.",
+  path: "/about",
 };
+
+export const metadata = pageMetadata({
+  ...seo,
+  keywords: ["about Geoloide", "Geoloide Private Limited", "management partner solutions Delhi", "business growth partner India"],
+});
 
 const values = [
   { icon: Target, title: "Outcome-obsessed", body: "We measure success by your growth, not by deliverables shipped." },
@@ -27,6 +35,7 @@ export default function AboutPage() {
           </>
         }
         description={`${site.legalName} is a management partner solutions company headquartered in New Delhi. We unite marketing, technology and operations expertise to help ambitious businesses compete — and win — globally.`}
+        breadcrumbs={[{ name: "About Us", path: seo.path }]}
       >
         <ButtonLink href="/contact" arrow>
           Work with us
@@ -157,6 +166,7 @@ export default function AboutPage() {
       </section>
 
       <CtaBanner />
+      <JsonLd data={webPageSchema({ type: "AboutPage", name: seo.title, description: seo.description, path: seo.path })} />
     </>
   );
 }

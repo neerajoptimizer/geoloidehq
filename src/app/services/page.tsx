@@ -1,15 +1,27 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { CtaBanner, PageHero, ProcessSection } from "@/components/sections";
+import { JsonLd } from "@/components/seo";
 import { ButtonLink, Container, ServiceIcon } from "@/components/ui";
+import { absoluteUrl, pageMetadata, webPageSchema } from "@/lib/seo";
 import { services } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Services",
+const seo = {
+  title: "Our Services – Marketing, Web & Automation",
   description:
-    "Digital marketing, website & app development, and business simplification & automation services from Geoloide.",
+    "Explore Geoloide's services: digital marketing & SEO, website and mobile app development, and business automation for companies in Delhi NCR and worldwide.",
+  path: "/services",
 };
+
+export const metadata = pageMetadata({
+  ...seo,
+  keywords: [
+    "digital marketing services",
+    "website and app development services",
+    "business automation services",
+    "IT and marketing services Delhi NCR",
+  ],
+});
 
 export default function ServicesPage() {
   return (
@@ -22,6 +34,7 @@ export default function ServicesPage() {
           </>
         }
         description="Three tightly connected capabilities, delivered by one team. Engage us for a single service or as your end-to-end growth partner."
+        breadcrumbs={[{ name: "Services", path: seo.path }]}
       >
         <ButtonLink href="/contact" arrow>
           Discuss your project
@@ -86,6 +99,21 @@ export default function ServicesPage() {
 
       <ProcessSection />
       <CtaBanner />
+      <JsonLd
+        data={[
+          webPageSchema({ type: "CollectionPage", name: seo.title, description: seo.description, path: seo.path }),
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: services.map((s, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: s.title,
+              url: absoluteUrl(`/services/${s.slug}`),
+            })),
+          },
+        ]}
+      />
     </>
   );
 }

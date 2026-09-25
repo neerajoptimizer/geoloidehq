@@ -1,12 +1,23 @@
 import type { ReactNode } from "react";
+import { Breadcrumbs } from "./seo";
 import { Container } from "./ui";
 
-export function LegalPage({ title, updated, children }: { title: string; updated: string; children: ReactNode }) {
+export function LegalPage({
+  title,
+  path,
+  updated,
+  children,
+}: {
+  title: string;
+  path: string;
+  updated: string;
+  children: ReactNode;
+}) {
   return (
     <>
       <section className="bg-gradient-to-b from-brand-50/70 to-white">
         <Container className="max-w-3xl py-20">
-          <p className="text-sm font-semibold text-brand-700">Legal</p>
+          <Breadcrumbs items={[{ name: title, path }]} />
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
           <p className="mt-4 text-ink-500">Last updated: {updated}</p>
         </Container>

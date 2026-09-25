@@ -48,6 +48,39 @@ CONTACT_TO_EMAIL=contact@geoloide.com          # optional, defaults to contact@g
 CONTACT_FROM_EMAIL="Geoloide <noreply@geoloide.com>"  # must be a verified sender domain
 ```
 
+## SEO
+
+Every page is built for search out of the box:
+
+- **Unique, keyword-targeted titles (≤ 60 chars) and meta descriptions (≤ 160 chars)** via the
+  `pageMetadata()` helper in [`src/lib/seo.ts`](src/lib/seo.ts); service SEO copy lives in `services[].seo`.
+- **Canonical URLs**, Open Graph and Twitter cards on every page, plus branded, auto-generated
+  1200×630 share images (`opengraph-image.tsx` — site-wide and one per service).
+- **Structured data (JSON-LD):** Organization, ProfessionalService (both offices, hours), WebSite,
+  WebPage/AboutPage/ContactPage/CollectionPage, BreadcrumbList, Service + OfferCatalog, ItemList and FAQPage.
+- **Visible breadcrumbs**, one `<h1>` per page, semantic headings, alt text on all images.
+- `sitemap.xml`, `robots.txt`, `manifest.webmanifest`, `llms.txt` (for AI search), app icons.
+- 308 redirects from `geoloide.com` → `www.geoloide.com` and common legacy URLs (`/about-us`, `/contact-us`…),
+  security headers, and a 404 page marked `noindex`.
+- Fully static pages, `next/font` and `next/image` for strong Core Web Vitals.
+
+### SEO environment variables (optional)
+
+```
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=xxxx   # Google Search Console HTML-tag verification code
+NEXT_PUBLIC_BING_SITE_VERIFICATION=xxxx     # Bing Webmaster Tools verification code
+NEXT_PUBLIC_GA_ID=G-XXXXXXX                 # Google Analytics 4 measurement ID
+```
+
+### Launch checklist
+
+1. Deploy to `https://www.geoloide.com` and point `geoloide.com` to the same deployment (it redirects to www).
+2. Verify the site in **Google Search Console** and **Bing Webmaster Tools**, then submit `https://www.geoloide.com/sitemap.xml`.
+3. Create/claim a **Google Business Profile** for both offices using the exact same name, address and email as the site.
+4. Add official social profile URLs to `site.social` in `src/lib/site.ts` (outputs schema.org `sameAs`).
+5. Replace placeholder stats, testimonials and roles with real data; add case studies and blog content over time.
+6. Validate structured data with the [Rich Results Test](https://search.google.com/test/rich-results).
+
 ## Brand
 
 - Green `#1DB954` (`brand-500`), Ink `#231E23` (`ink-900`)

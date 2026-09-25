@@ -1,12 +1,17 @@
-import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Privacy Policy" };
+export const metadata = pageMetadata({
+  title: "Privacy Policy",
+  description:
+    "How Geoloide Private Limited collects, uses and protects personal information submitted through geoloide.com, and your rights under Indian data protection law.",
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (
-    <LegalPage title="Privacy Policy" updated="September 2026">
+    <LegalPage title="Privacy Policy" path="/privacy-policy" updated="September 2026">
       <section>
         <p>
           {site.legalName} (&quot;Geoloide&quot;, &quot;we&quot;, &quot;us&quot;) respects your privacy. This policy

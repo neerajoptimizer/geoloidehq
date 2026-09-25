@@ -11,9 +11,33 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import { CtaBanner, ProcessSection, ServiceCard, Testimonials } from "@/components/sections";
+import { CtaBanner, Faq, ProcessSection, ServiceCard, Testimonials } from "@/components/sections";
+import { JsonLd } from "@/components/seo";
 import { ButtonLink, Container, Eyebrow, SectionHeading } from "@/components/ui";
-import { industries, services, site, stats } from "@/lib/site";
+import { faqSchema, pageMetadata, webPageSchema } from "@/lib/seo";
+import { homeFaqs, industries, services, site, stats } from "@/lib/site";
+
+const seo = {
+  title: "Geoloide | Digital Marketing, Web & App Development Agency",
+  description:
+    "Geoloide is a Delhi NCR management partner for digital marketing, website & app development and business automation. Get your business globalised.",
+  path: "/",
+};
+
+export const metadata = pageMetadata({
+  ...seo,
+  absoluteTitle: true,
+  keywords: [
+    "Geoloide",
+    "Geoloide Private Limited",
+    "digital marketing agency in Delhi NCR",
+    "website development company in Noida",
+    "app development company Delhi",
+    "business process automation India",
+    "management partner solutions",
+    "global business growth agency",
+  ],
+});
 
 const reasons = [
   {
@@ -225,7 +249,24 @@ export default function Home() {
       </section>
 
       <Testimonials />
+
+      {/* FAQ */}
+      <section className="pt-24">
+        <Container className="grid gap-12 lg:grid-cols-3">
+          <SectionHeading
+            align="left"
+            eyebrow="FAQ"
+            title="Questions businesses ask us"
+            description="Everything you need to know about working with Geoloide, a digital marketing, web development and automation partner in Delhi NCR."
+          />
+          <div className="lg:col-span-2">
+            <Faq items={homeFaqs} />
+          </div>
+        </Container>
+      </section>
+
       <CtaBanner />
+      <JsonLd data={[webPageSchema({ name: seo.title, description: seo.description, path: seo.path }), faqSchema(homeFaqs)]} />
     </>
   );
 }
