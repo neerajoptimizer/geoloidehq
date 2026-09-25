@@ -39,7 +39,7 @@ export function SectionHeading({
   dark?: boolean;
 }) {
   return (
-    <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
+    <div data-reveal className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
       {eyebrow && <Eyebrow dark={dark}>{eyebrow}</Eyebrow>}
       <h2
         className={cn(
@@ -81,7 +81,9 @@ export function ButtonLink({
     <Link
       href={href}
       className={cn(
-        "group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2",
+        "group relative isolate inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2",
+        // Light "shine" that sweeps across the button on hover.
+        "before:absolute before:inset-y-0 before:-left-1/2 before:-z-10 before:w-1/2 before:-skew-x-12 before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:transition-transform before:duration-700 hover:before:translate-x-[300%]",
         buttonStyles[variant],
         className,
       )}

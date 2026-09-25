@@ -6,7 +6,12 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Mail, MapPin, Menu, X } from "lucide-react";
 import { mainNav, services, site } from "@/lib/site";
+import { ScrollProgress } from "./motion";
 import { ButtonLink, Container, ServiceIcon, cn } from "./ui";
+
+// Brand-green underline that slides in on hover and stays on the active page.
+const navUnderline =
+  "relative after:absolute after:inset-x-4 after:bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-500 after:transition-transform after:duration-300 hover:after:scale-x-100";
 
 export function Header() {
   const pathname = usePathname();
@@ -58,7 +63,7 @@ export function Header() {
 
       <div
         className={cn(
-          "border-b transition-colors duration-300",
+          "relative border-b transition-colors duration-300",
           scrolled || open
             ? "border-ink-100 bg-white/90 shadow-sm backdrop-blur-lg"
             : "border-transparent bg-white/70 backdrop-blur",
@@ -66,7 +71,13 @@ export function Header() {
       >
         <Container className="flex h-18 items-center justify-between gap-6">
           <Link href="/" className="shrink-0" aria-label={`${site.name} home`}>
-            <Image src="/logo.png" alt={site.legalName} width={1057} height={336} priority className="h-11 w-auto sm:h-12" />
+            <Image
+              src="/logo.png"
+              alt={site.legalName}
+              width={1057}
+              height={336}
+              className={cn("w-auto transition-all duration-300", scrolled ? "h-10" : "h-11 sm:h-12")}
+            />
           </Link>
 
           <nav aria-label="Main" className="hidden lg:block">
@@ -78,7 +89,8 @@ export function Header() {
                       href={item.href}
                       className={cn(
                         "inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition",
-                        isActive(item.href) ? "text-brand-700" : "text-ink-700 hover:text-ink-900",
+                        navUnderline,
+                        isActive(item.href) ? "text-brand-700 after:scale-x-100" : "text-ink-700 hover:text-ink-900",
                       )}
                     >
                       {item.label}
@@ -87,7 +99,7 @@ export function Header() {
                         aria-hidden
                       />
                     </Link>
-                    <div className="invisible absolute top-full left-1/2 w-[26rem] -translate-x-1/2 pt-3 opacity-0 transition duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                    <div className="invisible absolute top-full left-1/2 w-[26rem] -translate-x-1/2 pt-3 translate-y-2 opacity-0 transition duration-200 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
                       <div className="rounded-2xl bg-white p-3 shadow-2xl ring-1 shadow-ink-900/10 ring-ink-100">
                         {services.map((s) => (
                           <Link
@@ -120,7 +132,8 @@ export function Header() {
                       aria-current={isActive(item.href) ? "page" : undefined}
                       className={cn(
                         "rounded-full px-4 py-2 text-sm font-medium transition",
-                        isActive(item.href) ? "text-brand-700" : "text-ink-700 hover:text-ink-900",
+                        navUnderline,
+                        isActive(item.href) ? "text-brand-700 after:scale-x-100" : "text-ink-700 hover:text-ink-900",
                       )}
                     >
                       {item.label}
@@ -149,12 +162,13 @@ export function Header() {
             </button>
           </div>
         </Container>
+        <ScrollProgress />
       </div>
 
       {open && (
         <div
           id="mobile-menu"
-          className="fixed inset-x-0 top-18 bottom-0 overflow-y-auto border-t border-ink-100 bg-white md:top-27 lg:hidden"
+          className="fixed inset-x-0 top-18 bottom-0 animate-menu-in overflow-y-auto border-t border-ink-100 bg-white md:top-27 lg:hidden"
         >
           <Container className="py-6">
             <nav aria-label="Mobile">

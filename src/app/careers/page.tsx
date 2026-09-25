@@ -1,6 +1,8 @@
 import { BookOpen, Briefcase, Clock, Coffee, Globe2, MapPin, TrendingUp } from "lucide-react";
 import { PageHero } from "@/components/sections";
+import { revealDelay } from "@/lib/motion";
 import { JsonLd } from "@/components/seo";
+import { images } from "@/lib/images";
 import { ButtonLink, Container, SectionHeading } from "@/components/ui";
 import { pageMetadata, webPageSchema } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -45,6 +47,7 @@ export default function CareersPage() {
         }
         description="We're a team of marketers, designers, engineers and consultants helping businesses grow beyond borders. If you love solving real problems, you'll fit right in."
         breadcrumbs={[{ name: "Careers", path: seo.path }]}
+        image={images.teamTogether}
       >
         <ButtonLink href="#open-roles" arrow>
           View open roles
@@ -55,9 +58,14 @@ export default function CareersPage() {
         <Container>
           <SectionHeading eyebrow="Why join us" title="A place to do your best work" />
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {perks.map((p) => (
-              <div key={p.title} className="rounded-3xl bg-ink-50 p-8">
-                <p.icon className="size-8 text-brand-600" aria-hidden />
+            {perks.map((p, i) => (
+              <div
+                key={p.title}
+                data-reveal
+                style={revealDelay(i, 100)}
+                className="group rounded-3xl bg-ink-50 p-8 transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-brand-500/10 hover:ring-1 hover:ring-brand-200"
+              >
+                <p.icon className="size-8 text-brand-600 transition duration-300 group-hover:scale-110" aria-hidden />
                 <h3 className="mt-6 text-lg font-bold">{p.title}</h3>
                 <p className="mt-2 text-ink-500">{p.body}</p>
               </div>
@@ -70,10 +78,12 @@ export default function CareersPage() {
         <Container className="max-w-5xl">
           <SectionHeading eyebrow="Open roles" title="Current opportunities" />
           <ul className="mt-12 space-y-4">
-            {roles.map((r) => (
+            {roles.map((r, i) => (
               <li
                 key={r.title}
-                className="flex flex-col gap-4 rounded-2xl bg-white p-6 ring-1 ring-ink-100 sm:flex-row sm:items-center sm:justify-between"
+                data-reveal
+                style={revealDelay(i, 70)}
+                className="flex flex-col gap-4 rounded-2xl bg-white p-6 ring-1 ring-ink-100 transition duration-300 hover:shadow-lg hover:ring-brand-200 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div>
                   <h3 className="text-lg font-bold">{r.title}</h3>

@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import { Analytics } from "@/components/analytics";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { RevealObserver } from "@/components/motion";
 import { JsonLd } from "@/components/seo";
 import { absoluteUrl, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { services, site } from "@/lib/site";
@@ -143,7 +144,16 @@ const structuredData = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${outfit.variable} h-full antialiased`}>
+    <html lang="en-IN" className={`${inter.variable} ${outfit.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        {/* Enables scroll-reveal styles only when JS runs; falls back to fully visible content if it never boots. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.add('js');setTimeout(function(){var d=document.documentElement;if(!d.classList.contains('reveal-ready'))d.classList.remove('js')},3000)",
+          }}
+        />
+      </head>
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
@@ -157,6 +167,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <JsonLd data={structuredData} />
+        <RevealObserver />
         <Analytics />
       </body>
     </html>
