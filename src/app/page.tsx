@@ -14,8 +14,9 @@ import {
 import { Marquee } from "@/components/marquee";
 import { CountUp } from "@/components/motion";
 import { revealDelay } from "@/lib/motion";
-import { CtaBanner, Faq, ProcessSection, ServiceCard, Testimonials } from "@/components/sections";
+import { CtaBanner, Faq, ProcessSection, ServiceCard } from "@/components/sections";
 import { JsonLd } from "@/components/seo";
+import { TestimonialsSection } from "@/components/testimonials";
 import { ButtonLink, Container, Eyebrow, SectionHeading } from "@/components/ui";
 import { images } from "@/lib/images";
 import { faqSchema, pageMetadata, webPageSchema } from "@/lib/seo";
@@ -392,7 +393,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Testimonials />
+      <TestimonialsSection />
 
       {/* FAQ */}
       <section className="pt-24">

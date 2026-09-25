@@ -307,27 +307,6 @@ export const processSteps = [
   },
 ];
 
-export const testimonials = [
-  {
-    quote:
-      "Geoloide rebuilt our website and ran our ads in three new markets. Enquiries doubled within a quarter and our cost per lead dropped significantly.",
-    name: "Rohit Malhotra",
-    role: "Founder, export manufacturing business",
-  },
-  {
-    quote:
-      "Their automation work removed hours of manual reporting every week. Our team finally has one source of truth for sales and operations.",
-    name: "Priya Nair",
-    role: "COO, logistics company",
-  },
-  {
-    quote:
-      "A true management partner — strategic, responsive and genuinely invested in our growth. The mobile app they delivered is rated 4.8 by our users.",
-    name: "Aman Verma",
-    role: "Director, retail brand",
-  },
-];
-
 export const industries = [
   "Manufacturing & Export",
   "Retail & E-commerce",

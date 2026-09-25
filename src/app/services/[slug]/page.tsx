@@ -6,10 +6,12 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { CtaBanner, Faq, PageHero } from "@/components/sections";
 import { revealDelay } from "@/lib/motion";
 import { JsonLd } from "@/components/seo";
+import { ServiceTestimonials } from "@/components/testimonials";
 import { ButtonLink, Container, SectionHeading, ServiceIcon } from "@/components/ui";
 import { serviceImages } from "@/lib/images";
 import { absoluteUrl, faqSchema, ORG_ID, pageMetadata, webPageSchema } from "@/lib/seo";
 import { getService, services, site } from "@/lib/site";
+import { testimonialsForService } from "@/lib/testimonials";
 
 export const dynamicParams = false;
 
@@ -157,6 +159,8 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           </div>
         </Container>
       </section>
+
+      <ServiceTestimonials items={testimonialsForService(service.slug)} serviceTitle={service.title} />
 
       <section className="bg-ink-50 py-24">
         <Container className="grid gap-12 lg:grid-cols-3">

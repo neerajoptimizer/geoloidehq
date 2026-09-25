@@ -16,6 +16,7 @@ ${services.map((s) => `- [${s.title}](${site.url}/services/${s.slug}): ${s.short
 ## Company
 - [About](${site.url}/about): Story, mission, values and offices
 - [Our Process](${site.url}/process): How projects are delivered
+- [Testimonials](${site.url}/testimonials): Client reviews, incl. Easy Pip (fintech website) and Laundry Lounge (laundry management software)
 - [Careers](${site.url}/careers): Open roles in Noida and New Delhi
 - [Contact](${site.url}/contact): Free consultation and enquiries
 

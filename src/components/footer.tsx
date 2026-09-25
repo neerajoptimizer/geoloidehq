@@ -8,6 +8,7 @@ import { Container } from "./ui";
 const companyLinks = [
   { href: "/about", label: "About Us" },
   { href: "/process", label: "Our Process" },
+  { href: "/testimonials", label: "Testimonials" },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
 ];
