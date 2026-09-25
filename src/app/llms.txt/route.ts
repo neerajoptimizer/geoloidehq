@@ -27,6 +27,7 @@ ${posts.map((p) => `- [${p.meta.title}](${site.url}/blog/${p.slug}): ${p.meta.de
 
 ## Contact
 - Email: ${site.email}
+- WhatsApp: ${site.whatsapp.display}
 ${site.offices.map((o) => `- ${o.label}: ${o.lines.join(", ")}`).join("\n")}
 - Hours: ${site.hours}
 `;

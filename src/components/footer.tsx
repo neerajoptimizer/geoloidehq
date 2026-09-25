@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Globe, Mail, MapPin } from "lucide-react";
-import { services, site } from "@/lib/site";
+import { services, site, whatsappUrl } from "@/lib/site";
 import { SocialLinks } from "./social-icons";
+import { WhatsAppIcon } from "./whatsapp";
 import { Container } from "./ui";
 
 const companyLinks = [
@@ -31,6 +32,15 @@ export function Footer() {
             </Link>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink-400">{site.description}</p>
             <div className="mt-6 space-y-2 text-sm">
+              <a
+                href={whatsappUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-white"
+              >
+                <WhatsAppIcon className="size-4 text-[#25D366]" />
+                {site.whatsapp.display} <span className="text-xs text-ink-500">(WhatsApp)</span>
+              </a>
               <a href={`mailto:${site.email}`} className="flex items-center gap-2 hover:text-white">
                 <Mail className="size-4 text-brand-400" aria-hidden />
                 {site.email}

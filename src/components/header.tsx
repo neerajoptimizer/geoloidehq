@@ -5,9 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Mail, MapPin, Menu, X } from "lucide-react";
-import { mainNav, services, site } from "@/lib/site";
+import { mainNav, services, site, whatsappUrl } from "@/lib/site";
 import { ScrollProgress } from "./motion";
 import { ButtonLink, Container, ServiceIcon, cn } from "./ui";
+import { WhatsAppButton, WhatsAppIcon } from "./whatsapp";
 
 // Brand-green underline that slides in on hover and stays on the active page.
 const navUnderline =
@@ -49,6 +50,15 @@ export function Header() {
             {site.descriptor} · <span className="text-brand-400">{site.tagline}</span>
           </p>
           <div className="flex items-center gap-6">
+            <a
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-white"
+            >
+              <WhatsAppIcon className="size-3.5 text-[#25D366]" />
+              {site.whatsapp.display}
+            </a>
             <a href={`mailto:${site.email}`} className="inline-flex items-center gap-1.5 hover:text-white">
               <Mail className="size-3.5" aria-hidden />
               {site.email}
@@ -207,6 +217,7 @@ export function Header() {
               <ButtonLink href="/contact" className="w-full" arrow>
                 Get a Free Consultation
               </ButtonLink>
+              <WhatsAppButton className="w-full" />
               <a
                 href={`mailto:${site.email}`}
                 className="flex items-center justify-center gap-2 py-2 text-sm font-medium text-ink-600"

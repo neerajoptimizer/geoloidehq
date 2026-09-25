@@ -6,6 +6,7 @@ import { images, serviceImages, type SiteImage } from "@/lib/images";
 import { processSteps, type Service } from "@/lib/site";
 import { revealDelay } from "@/lib/motion";
 import { Breadcrumbs } from "./seo";
+import { WhatsAppButton } from "./whatsapp";
 import { ButtonLink, Container, Eyebrow, SectionHeading, ServiceIcon, cn } from "./ui";
 
 export function PageHero({
@@ -195,9 +196,7 @@ export function CtaBanner({
             <ButtonLink href="/contact" variant="dark" arrow>
               Book a Free Consultation
             </ButtonLink>
-            <ButtonLink href="/services" variant="ghostLight">
-              Explore Services
-            </ButtonLink>
+            <WhatsAppButton variant="light" />
           </div>
         </div>
       </Container>

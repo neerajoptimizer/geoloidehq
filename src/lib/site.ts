@@ -7,6 +7,12 @@ export const site = {
     "Geoloide Private Limited is a management partner for growing businesses — delivering digital marketing, website & app development, and business simplification & automation that take brands global.",
   url: "https://www.geoloide.com",
   email: "contact@geoloide.com",
+  whatsapp: {
+    /** International format without "+" or spaces, as required by wa.me links. */
+    number: "919301278780",
+    display: "+91 93012 78780",
+    message: "Hi Geoloide! I'd like to discuss a project.",
+  },
   foundingLocation: "New Delhi, India",
   hours: "Mon – Sat, 10:00 AM – 7:00 PM IST",
   // Official social profiles — shown in the footer and output as schema.org sameAs.
@@ -344,3 +350,8 @@ export const homeFaqs = [
 
 /** Every platform across our service stacks, de-duplicated — used for the tools marquee. */
 export const tools = [...new Set(services.flatMap((s) => s.stack))];
+
+/** WhatsApp click-to-chat link with a pre-filled message. */
+export function whatsappUrl(message: string = site.whatsapp.message) {
+  return `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(message)}`;
+}
