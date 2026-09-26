@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#1db954",
-  colorScheme: "light",
+  colorScheme: "light dark",
 };
 
 const offices = [
@@ -157,6 +157,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-IN" className={`${inter.variable} ${outfit.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
+        {/* Applies the saved (or system) colour theme before first paint so there is no light/dark flash. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('theme');if(t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}",
+          }}
+        />
         {/* Enables scroll-reveal styles only when JS runs; falls back to fully visible content if it never boots. */}
         <script
           dangerouslySetInnerHTML={{

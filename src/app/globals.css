@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Dark mode is class-based so visitors can pick Light / System / Dark (see components/theme-toggle.tsx). */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-brand-50: #ecfdf2;
   --color-brand-100: #d1fadf;
@@ -261,4 +264,100 @@ body {
 .goog-text-highlight {
   background: none !important;
   box-shadow: none !important;
+}
+
+/*
+ * Dark theme. Instead of adding dark: variants to every component, the palette is remapped: the ink scale
+ * flips (headings become light, borders and subtle surfaces become dark) and the pale brand tints darken.
+ * Sections that are already dark by design — the footer, dark/green panels, image overlays — restore the
+ * original palette so they look exactly the same in both themes.
+ */
+html.dark {
+  color-scheme: dark;
+  --page: #0f0d10;
+  --surface: #18151a;
+  --color-ink-50: #1c191e;
+  --color-ink-100: #2b272e;
+  --color-ink-200: #3b363f;
+  --color-ink-300: #57515b;
+  --color-ink-400: #8f8993;
+  --color-ink-500: #aca6b0;
+  --color-ink-600: #c4bfc7;
+  --color-ink-700: #d7d3d9;
+  --color-ink-800: #e9e6eb;
+  --color-ink-900: #f6f4f7;
+  --color-brand-50: #0f2418;
+  --color-brand-100: #143321;
+  --color-brand-200: #1b4a2e;
+  --color-brand-700: #4fdc8b;
+  --color-brand-800: #8aefb5;
+  --color-brand-900: #c3f7d8;
+}
+.dark :is(
+    .bg-ink-800,
+    .bg-ink-900,
+    .bg-ink-950,
+    .bg-ink-900\/75,
+    .from-ink-900,
+    .from-ink-900\/30,
+    .from-ink-900\/50,
+    .from-ink-900\/60,
+    .bg-brand-500,
+    .bg-brand-600,
+    .bg-brand-700,
+    [data-theme-fixed]
+  ) {
+  --page: #ffffff;
+  --surface: #ffffff;
+  --color-ink-50: #f7f7f8;
+  --color-ink-100: #eeedef;
+  --color-ink-200: #d9d7db;
+  --color-ink-300: #b8b4ba;
+  --color-ink-400: #8f8993;
+  --color-ink-500: #6e6873;
+  --color-ink-600: #57515b;
+  --color-ink-700: #46414a;
+  --color-ink-800: #2f2a31;
+  --color-ink-900: #231e23;
+  --color-brand-50: #ecfdf2;
+  --color-brand-100: #d1fadf;
+  --color-brand-200: #a6f3c3;
+  --color-brand-700: #117637;
+  --color-brand-800: #135d30;
+  --color-brand-900: #124d2a;
+}
+html.dark body {
+  background-color: var(--page);
+}
+.dark .bg-white {
+  background-color: var(--surface);
+}
+.dark .bg-white\/95 {
+  background-color: color-mix(in srgb, var(--surface) 95%, transparent);
+}
+.dark .bg-white\/90 {
+  background-color: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+.dark .bg-white\/80 {
+  background-color: color-mix(in srgb, var(--surface) 80%, transparent);
+}
+.dark .bg-white\/70 {
+  background-color: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+.dark .to-white {
+  --tw-gradient-to: var(--page);
+}
+.dark .from-white {
+  --tw-gradient-from: var(--page);
+}
+.dark .ring-white {
+  --tw-ring-color: var(--page);
+}
+.dark .bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+}
+.dark ::selection {
+  color: #0f0d10;
 }
