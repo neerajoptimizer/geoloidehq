@@ -3,6 +3,7 @@ import { CtaBanner, PageHero } from "@/components/sections";
 import Image from "next/image";
 import { CountUp } from "@/components/motion";
 import { revealDelay } from "@/lib/motion";
+import { CompanyInfoCard } from "@/components/company-info";
 import { JsonLd } from "@/components/seo";
 import { images } from "@/lib/images";
 import { ButtonLink, Container, SectionHeading } from "@/components/ui";
@@ -166,6 +167,19 @@ export default function AboutPage() {
       </section>
 
       <section className="bg-ink-50 py-24">
+        <Container>
+          <SectionHeading
+            eyebrow="Registered & verified"
+            title="A registered Indian company since 2021"
+            description="Geoloide Private Limited is incorporated under the Companies Act, 2013 and registered with the Registrar of Companies, Delhi."
+          />
+          <div data-reveal className="mx-auto mt-12 max-w-4xl">
+            <CompanyInfoCard />
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-24">
         <Container>
           <SectionHeading eyebrow="Where to find us" title="Our offices" />
           <div className="mt-16 grid gap-6 md:grid-cols-2">

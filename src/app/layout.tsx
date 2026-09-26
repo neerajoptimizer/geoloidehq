@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#1db954",
-  colorScheme: "light",
+  colorScheme: "light dark",
 };
 
 const offices = [
@@ -64,7 +64,7 @@ const offices = [
     name: `${site.legalName} — Registered Office`,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Level 10, Plot No. 18-20, HT House, KG Marg",
+      streetAddress: "Level 10, Plot No. 18-20, HT House, KG Marg, Connaught Place",
       addressLocality: "New Delhi",
       addressRegion: "Delhi",
       postalCode: "110001",
@@ -93,8 +93,15 @@ const structuredData = {
       "@type": "Organization",
       "@id": ORG_ID,
       name: site.legalName,
+      legalName: site.legalName,
       alternateName: site.name,
       url: site.url,
+      foundingDate: site.company.incorporated,
+      taxID: site.company.gstin,
+      identifier: [
+        { "@type": "PropertyValue", propertyID: "CIN", value: site.company.cin },
+        { "@type": "PropertyValue", propertyID: "GSTIN", value: site.company.gstin },
+      ],
       logo: { "@type": "ImageObject", url: absoluteUrl("/logo.png"), width: 1057, height: 336 },
       image: absoluteUrl("/opengraph-image"),
       description: site.description,
@@ -114,7 +121,7 @@ const structuredData = {
         areaServed: "Worldwide",
       },
       department: offices.map((o) => ({ "@id": `${site.url}/#${o.id}` })),
-      sameAs: site.social.map((s) => s.href),
+      sameAs: [...site.social.map((s) => s.href), site.google.knowledgeGraphUrl],
     },
     ...offices.map((o) => ({
       "@type": "ProfessionalService",
@@ -150,6 +157,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-IN" className={`${inter.variable} ${outfit.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
+        {/* Applies the saved (or system) colour theme before first paint so there is no light/dark flash. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('theme');if(t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}",
+          }}
+        />
         {/* Enables scroll-reveal styles only when JS runs; falls back to fully visible content if it never boots. */}
         <script
           dangerouslySetInnerHTML={{
@@ -173,6 +187,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <WhatsAppFloat />
         <JsonLd data={structuredData} />
         <RevealObserver />
+        <div id="google_translate_element" hidden />
         <Analytics />
       </body>
     </html>

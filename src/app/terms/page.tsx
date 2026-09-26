@@ -1,3 +1,4 @@
+import { LegalCompanyDetails } from "@/components/company-info";
 import { LegalPage } from "@/components/legal";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -17,6 +18,13 @@ export default function TermsPage() {
           These terms govern your use of {site.url}, operated by {site.legalName}. By using this website you agree to
           these terms.
         </p>
+
+        <h2>About us</h2>
+        <p>
+          {site.legalName} is a private limited company incorporated in India under the Companies Act, 2013 and
+          registered with the Registrar of Companies, Delhi.
+        </p>
+        <LegalCompanyDetails />
 
         <h2>Use of the website</h2>
         <p>

@@ -7,6 +7,18 @@ export const site = {
     "Geoloide Private Limited is a management partner for growing businesses — delivering digital marketing, website & app development, and business simplification & automation that take brands global.",
   url: "https://www.geoloide.com",
   email: "contact@geoloide.com",
+  // Official registration (Ministry of Corporate Affairs, India).
+  company: {
+    cin: "U72900DL2021PTC381087",
+    gstin: "07AAJCG0339E1ZV",
+    incorporated: "2021-05-13",
+    incorporatedDisplay: "13 May 2021",
+    roc: "RoC Delhi",
+    type: "Private Limited Company",
+    status: "Active",
+    /** MCA master-data search — visitors can look up the company by CIN. */
+    verifyUrl: "https://www.mca.gov.in/content/mca/global/en/mca/master-data/MDS.html",
+  },
   whatsapp: {
     /** International format without "+" or spaces, as required by wa.me links. */
     number: "919301278780",
@@ -20,12 +32,21 @@ export const site = {
     { name: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/company/geoloide" },
     { name: "Instagram", icon: "instagram", href: "https://www.instagram.com/geoloidehq/" },
     { name: "Facebook", icon: "facebook", href: "https://www.facebook.com/p/Geoloide-Pvt-Ltd-61552338420812/" },
+    { name: "Google", icon: "google", href: "https://share.google/rZZoZNxSQ2yPyrUdZ" },
   ],
+  // Google Business Profile. Add the real rating/review count to show stars on the Google badge.
+  google: {
+    profileUrl: "https://share.google/rZZoZNxSQ2yPyrUdZ",
+    /** Stable Knowledge Graph URL for the business (used in schema.org sameAs). */
+    knowledgeGraphUrl: "https://www.google.com/search?kgmid=/g/11q2t331lq",
+    rating: undefined as number | undefined,
+    reviewCount: undefined as number | undefined,
+  },
   areaServed: ["India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "Canada", "Singapore"],
   offices: [
     {
       label: "Registered Office",
-      lines: ["Level 10, Plot No. 18-20, HT House", "KG Marg, New Delhi", "Delhi 110001"],
+      lines: ["Level 10, Plot No. 18-20, HT House", "KG Marg, Connaught Place", "New Delhi, Delhi 110001"],
       mapQuery: "HT House, 18-20 KG Marg, New Delhi 110001",
     },
     {

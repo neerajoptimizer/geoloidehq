@@ -27,6 +27,7 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
     company: field("company"),
     service: field("service"),
     budget: field("budget"),
+    preferredContact: field("preferred_contact"),
     message: field("message"),
   };
 

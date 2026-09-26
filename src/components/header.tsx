@@ -6,7 +6,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Mail, MapPin, Menu, X } from "lucide-react";
 import { mainNav, services, site, whatsappUrl } from "@/lib/site";
+import { LanguageSwitcher } from "./language-switcher";
 import { ScrollProgress } from "./motion";
+import { ThemeToggle } from "./theme-toggle";
 import { ButtonLink, Container, ServiceIcon, cn } from "./ui";
 import { WhatsAppButton, WhatsAppIcon } from "./whatsapp";
 
@@ -67,6 +69,9 @@ export function Header() {
               <MapPin className="size-3.5" aria-hidden />
               New Delhi · Noida
             </span>
+            <span className="h-4 w-px bg-white/15" aria-hidden />
+            <LanguageSwitcher variant="dark" />
+            <ThemeToggle />
           </div>
         </Container>
       </div>
@@ -86,7 +91,14 @@ export function Header() {
               alt={site.legalName}
               width={1057}
               height={336}
-              className={cn("w-auto transition-all duration-300", scrolled ? "h-10" : "h-11 sm:h-12")}
+              className={cn("w-auto transition-all duration-300 dark:hidden", scrolled ? "h-10" : "h-11 sm:h-12")}
+            />
+            <Image
+              src="/logo-light.png"
+              alt={site.legalName}
+              width={1057}
+              height={336}
+              className={cn("hidden w-auto transition-all duration-300 dark:block", scrolled ? "h-10" : "h-11 sm:h-12")}
             />
           </Link>
 
@@ -154,7 +166,8 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <LanguageSwitcher className="md:hidden" />
             <div className="hidden sm:block lg:hidden xl:block">
               <ButtonLink href="/contact" arrow>
                 Get a Free Consultation
@@ -218,6 +231,10 @@ export function Header() {
                 Get a Free Consultation
               </ButtonLink>
               <WhatsAppButton className="w-full" />
+              <div className="flex items-center justify-between rounded-2xl bg-ink-50 px-4 py-2">
+                <span className="text-sm font-semibold text-ink-700">Theme</span>
+                <ThemeToggle variant="light" />
+              </div>
               <a
                 href={`mailto:${site.email}`}
                 className="flex items-center justify-center gap-2 py-2 text-sm font-medium text-ink-600"

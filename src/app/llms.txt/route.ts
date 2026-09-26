@@ -26,6 +26,7 @@ ${services.map((s) => `- [${s.title}](${site.url}/services/${s.slug}): ${s.short
 ${posts.map((p) => `- [${p.meta.title}](${site.url}/blog/${p.slug}): ${p.meta.description}`).join("\n")}
 
 ## Contact
+- Legal name: ${site.legalName} (CIN ${site.company.cin}, GSTIN ${site.company.gstin}, incorporated ${site.company.incorporatedDisplay}, ${site.company.roc})
 - Email: ${site.email}
 - WhatsApp: ${site.whatsapp.display}
 ${site.offices.map((o) => `- ${o.label}: ${o.lines.join(", ")}`).join("\n")}
